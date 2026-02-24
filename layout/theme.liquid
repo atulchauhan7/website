@@ -24,9 +24,9 @@
 {{ 'luxe-theme.css' | asset_url | stylesheet_tag }}
 {{ 'luxe-animations.css' | asset_url | stylesheet_tag }}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+{% assign heading_font = settings.heading_font %}
+{% assign body_font = settings.body_font %}
+<style>{{ heading_font | font_face: font_display: 'swap' }}{{ body_font | font_face: font_display: 'swap' }}{% assign heading_bold = heading_font | font_modify: 'weight', 'bold' %}{% if heading_bold %}{{ heading_bold | font_face: font_display: 'swap' }}{% endif %}{% assign body_bold = body_font | font_modify: 'weight', 'bold' %}{% if body_bold %}{{ body_bold | font_face: font_display: 'swap' }}{% endif %}{% assign body_italic = body_font | font_modify: 'style', 'italic' %}{% if body_italic %}{{ body_italic | font_face: font_display: 'swap' }}{% endif %}</style>
 
 {{ content_for_header }}
 
@@ -85,10 +85,10 @@ search_url: '{{ routes.search_url }}'
 <div class="cursor-follower-dot"></div>
 {% endif %}
 
-{{ 'luxe-theme.js' | asset_url | script_tag }}
+<script src="{{ 'luxe-theme.js' | asset_url }}" defer></script>
 
 {% if request.design_mode %}
-{{ 'theme-editor.js' | asset_url | script_tag }}
+<script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
 {% endif %}
 </body>
 </html>

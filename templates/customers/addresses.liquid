@@ -3,13 +3,11 @@
 <div class="page-header" data-animate="fade-up">
 <h1>Your Addresses</h1>
 </div>
-
 <div data-animate="fade-up">
-<a href="#" onclick="document.getElementById('add-address').style.display='block'; return false;" class="btn btn--primary" style="margin-bottom: 2rem;">Add New Address</a>
-
-<div id="add-address" style="display: none; padding: 2rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-bottom: 2rem;">
+<button type="button" class="btn btn--primary mb-2" data-toggle-address="add-address">Add New Address</button>
+<div id="add-address" class="acct-card acct-card--lg mb-2" style="display:none">
 {% form 'customer_address', customer.new_address %}
-<h3 style="margin-bottom: 1.5rem;">New Address</h3>
+<h3 class="mb-2">New Address</h3>
 <div class="grid grid--2">
 <div class="form-group">
 <label class="form-label">First Name</label>
@@ -50,29 +48,27 @@
 <label class="form-label">Phone</label>
 <input class="form-input" type="tel" name="address[phone]">
 </div>
-<div style="display: flex; gap: 1rem;">
+<div class="form-actions">
 <button type="submit" class="btn btn--primary ripple-effect">Save Address</button>
-<button type="button" onclick="document.getElementById('add-address').style.display='none';" class="btn btn--secondary">Cancel</button>
+<button type="button" class="btn btn--secondary" data-toggle-address="add-address">Cancel</button>
 </div>
 {% endform %}
 </div>
-
 {% for address in customer.addresses %}
-<div style="padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-bottom: 1rem;">
+<div class="acct-card">
 {% if address == customer.default_address %}
-<span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); font-weight: 600;">Default</span>
+<span class="acct-badge">Default</span>
 {% endif %}
-<p style="font-weight: 500;">{{ address.first_name }} {{ address.last_name }}</p>
-<p style="font-size: 0.9rem; color: var(--color-text-muted);">
+<p class="acct-card__bold">{{ address.first_name }} {{ address.last_name }}</p>
+<p class="acct-addr">
 {{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}<br>
 {{ address.city }}, {{ address.province }} {{ address.zip }}<br>
 {{ address.country }}
 </p>
 </div>
 {% endfor %}
-
-<div style="margin-top: 2rem;">
-<a href="/account" class="btn btn--secondary">â† Back to Account</a>
+<div class="mt-2">
+<a href="/account" class="btn btn--secondary">&larr; Back to Account</a>
 </div>
 </div>
 </div>

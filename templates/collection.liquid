@@ -6,20 +6,16 @@
 <p>{{ collection.description }}</p>
 {% endif %}
 </div>
-
 <div class="collection-toolbar">
 <span class="collection-toolbar__count">{{ collection.products_count }} products</span>
 <div class="collection-toolbar__sort">
-<select id="sort-by" onchange="window.location.href = this.value;">
+<select id="sort-by" data-sort-collection>
 {% for option in collection.sort_options %}
-<option value="{{ option.url }}" {% if option.value == collection.sort_by %}selected{% endif %}>
-{{ option.name }}
-</option>
+<option value="{{ option.url }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
 {% endfor %}
 </select>
 </div>
 </div>
-
 {% paginate collection.products by 12 %}
 <div class="grid grid--4" data-animate-stagger>
 {% for product in collection.products %}
@@ -28,7 +24,6 @@
 </div>
 {% endfor %}
 </div>
-
 {% if paginate.pages > 1 %}
 {% render 'pagination', paginate: paginate %}
 {% endif %}

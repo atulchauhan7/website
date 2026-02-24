@@ -3,34 +3,22 @@
 <div class="page-header" data-animate="fade-up">
 <h1>Gift Card</h1>
 </div>
-
-<div class="page-content text-center" data-animate="fade-up" style="max-width: 480px;">
-<div style="padding: 3rem; background: var(--color-surface); border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="page-content text-center" data-animate="fade-up" style="max-width:480px">
+<div class="gift-wrap">
 {% if gift_card.image %}
-<img src="{{ gift_card.image | image_url: width: 400 }}" alt="Gift card" style="margin: 0 auto 2rem; max-width: 300px;">
+<img src="{{ gift_card.image | image_url: width: 400 }}" alt="Gift card" loading="lazy" width="300" height="190">
 {% endif %}
-
-<h2 style="margin-bottom: 0.5rem;">{{ gift_card.balance | money }}</h2>
-
+<h2 class="mb-1">{{ gift_card.balance | money }}</h2>
 {% if gift_card.enabled %}
-<p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">Active</p>
+<p class="gift-status gift-status--on">Active</p>
 {% else %}
-<p style="color: #e74c3c; font-weight: 600; margin-bottom: 1rem;">Disabled</p>
+<p class="gift-status gift-status--off">Disabled</p>
 {% endif %}
-
-<div style="background: #fff; padding: 1rem; border-radius: var(--border-radius); border: 2px dashed var(--color-border); margin-bottom: 1.5rem;">
-<span style="font-family: monospace; font-size: 1.4rem; letter-spacing: 0.1em; font-weight: 600;">
-{{ gift_card.code | format_code }}
-</span>
-</div>
-
+<div class="gift-code">{{ gift_card.code | format_code }}</div>
 {% if gift_card.expires_on %}
-<p style="font-size: 0.85rem; color: var(--color-text-muted);">
-Expires on {{ gift_card.expires_on | date: '%B %d, %Y' }}
-</p>
+<p class="gift-exp">Expires on {{ gift_card.expires_on | date: '%B %d, %Y' }}</p>
 {% endif %}
 </div>
-
 <a href="{{ shop.url }}" class="btn btn--primary ripple-effect">Start Shopping</a>
 </div>
 </div>

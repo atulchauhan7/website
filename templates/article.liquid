@@ -2,35 +2,30 @@
 <div class="container container--narrow">
 <article data-animate="fade-up">
 <div class="page-header">
-<div class="section-header__subtitle">{{ article.published_at | date: '%B %d, %Y' }} Â· {{ article.author }}</div>
+<div class="section-header__subtitle">{{ article.published_at | date: '%B %d, %Y' }} &middot; {{ article.author }}</div>
 <h1>{{ article.title }}</h1>
 </div>
-
 {% if article.image != blank %}
-<div class="image-reveal" style="border-radius: var(--border-radius); overflow: hidden; margin-bottom: 3rem;">
-<img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}">
+<div class="image-reveal mb-3" style="border-radius:var(--border-radius);overflow:hidden">
+<img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}" loading="lazy" width="1200" height="630">
 </div>
 {% endif %}
-
 <div class="page-content">
 {{ article.content }}
 </div>
-
 {% if blog.comments_enabled? %}
-<div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--color-border);">
+<div class="comments-wrap">
 <h3>Comments ({{ article.comments_count }})</h3>
-
 {% for comment in article.comments %}
-<div style="padding: 1.5rem 0; border-bottom: 1px solid var(--color-border);">
-<div style="font-weight: 600; margin-bottom: 0.25rem;">{{ comment.author }}</div>
-<div style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">{{ comment.created_at | date: '%B %d, %Y' }}</div>
-<p style="color: var(--color-text-muted);">{{ comment.content }}</p>
+<div class="comment">
+<div class="comment__author">{{ comment.author }}</div>
+<div class="comment__date">{{ comment.created_at | date: '%B %d, %Y' }}</div>
+<p class="comment__body">{{ comment.content }}</p>
 </div>
 {% endfor %}
-
 {% form 'new_comment', article %}
-<div style="margin-top: 2rem;">
-<h4 style="margin-bottom: 1.5rem;">Leave a Comment</h4>
+<div class="comment-form">
+<h4>Leave a Comment</h4>
 <div class="form-group">
 <label class="form-label" for="comment-author">Name</label>
 <input class="form-input" type="text" id="comment-author" name="comment[author]" required>

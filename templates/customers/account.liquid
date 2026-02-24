@@ -4,37 +4,35 @@
 <h1>My Account</h1>
 <p class="text-muted">Welcome back, {{ customer.first_name }}!</p>
 </div>
-
-<div class="grid grid--2" style="gap: 3rem;" data-animate="fade-up">
+<div class="grid grid--2 gap-3" data-animate="fade-up">
 <div>
-<h3 style="margin-bottom: 1.5rem;">Order History</h3>
+<h3 class="mb-2">Order History</h3>
 {% if customer.orders.size > 0 %}
 {% for order in customer.orders %}
-<div style="padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-bottom: 1rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-<a href="{{ order.customer_url }}" style="font-weight: 600; color: var(--color-accent);">{{ order.name }}</a>
-<span style="font-size: 0.8rem; color: var(--color-text-muted);">{{ order.created_at | date: '%B %d, %Y' }}</span>
+<div class="acct-card">
+<div class="acct-card__head">
+<a href="{{ order.customer_url }}" class="acct-card__link">{{ order.name }}</a>
+<span class="acct-card__meta">{{ order.created_at | date: '%B %d, %Y' }}</span>
 </div>
-<div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+<div class="acct-card__row">
 <span>{{ order.financial_status_label }}</span>
-<span style="font-weight: 600;">{{ order.total_price | money }}</span>
+<span class="acct-card__bold">{{ order.total_price | money }}</span>
 </div>
 </div>
 {% endfor %}
 {% else %}
 <p class="text-muted">You haven't placed any orders yet.</p>
-<a href="/collections/all" class="btn btn--primary" style="margin-top: 1rem;">Start Shopping</a>
+<a href="/collections/all" class="btn btn--primary mt-1">Start Shopping</a>
 {% endif %}
 </div>
-
 <div>
-<h3 style="margin-bottom: 1.5rem;">Account Details</h3>
-<div style="padding: 2rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+<h3 class="mb-2">Account Details</h3>
+<div class="acct-card acct-card--lg">
 <p><strong>{{ customer.name }}</strong></p>
 <p class="text-muted">{{ customer.email }}</p>
 {% if customer.default_address %}
-<div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
-<p style="font-size: 0.9rem; color: var(--color-text-muted);">
+<div class="acct-sep">
+<p class="acct-addr">
 {{ customer.default_address.address1 }}<br>
 {% if customer.default_address.address2 != blank %}{{ customer.default_address.address2 }}<br>{% endif %}
 {{ customer.default_address.city }}, {{ customer.default_address.province }} {{ customer.default_address.zip }}<br>
@@ -42,11 +40,10 @@
 </p>
 </div>
 {% endif %}
-<a href="/account/addresses" class="btn btn--secondary btn--small" style="margin-top: 1.5rem;">Manage Addresses</a>
+<a href="/account/addresses" class="btn btn--secondary btn--small mt-2">Manage Addresses</a>
 </div>
-
-<div style="margin-top: 2rem;">
-<a href="/account/logout" style="font-size: 0.85rem; color: var(--color-text-muted);">Log out â†’</a>
+<div class="mt-2">
+<a href="/account/logout" class="text-muted" style="font-size:.85rem">Log out &rarr;</a>
 </div>
 </div>
 </div>

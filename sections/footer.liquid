@@ -47,7 +47,9 @@
 <div class="site-footer__bottom">
 <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
 <div class="site-footer__payment">
-{{ 'ðŸ’³' }} Visa â€¢ Mastercard â€¢ Amex â€¢ PayPal â€¢ Apple Pay
+{% for type in shop.enabled_payment_types %}
+{{ type | payment_type_svg_tag }}
+{% endfor %}
 </div>
 </div>
 </div>
