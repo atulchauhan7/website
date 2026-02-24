@@ -1,0 +1,54 @@
+<div class="page-template">
+<div class="container container--narrow">
+<div class="page-header" data-animate="fade-up">
+<h1>Order {{ order.name }}</h1>
+<p class="text-muted">Placed on {{ order.created_at | date: '%B %d, %Y' }}</p>
+</div>
+
+<div data-animate="fade-up">
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+<thead>
+<tr style="border-bottom: 2px solid var(--color-border); text-align: left;">
+<th style="padding: 0.75rem 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Product</th>
+<th style="padding: 0.75rem 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Qty</th>
+<th style="padding: 0.75rem 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+{% for line_item in order.line_items %}
+<tr style="border-bottom: 1px solid var(--color-border);">
+<td style="padding: 1rem 0;">
+<a href="{{ line_item.product.url }}" style="font-weight: 500;">{{ line_item.title }}</a>
+{% if line_item.fulfillment %}
+<div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+{{ line_item.fulfillment.tracking_company }}
+{% if line_item.fulfillment.tracking_url %}
+- <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" style="color: var(--color-accent);">Track</a>
+{% endif %}
+</div>
+{% endif %}
+</td>
+<td style="padding: 1rem 0;">{{ line_item.quantity }}</td>
+<td style="padding: 1rem 0; text-align: right;">{{ line_item.final_line_price | money }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<div style="text-align: right; padding: 1rem 0; border-top: 2px solid var(--color-border);">
+<p>Subtotal: {{ order.line_items_subtotal_price | money }}</p>
+{% for shipping_method in order.shipping_methods %}
+<p>Shipping ({{ shipping_method.title }}): {{ shipping_method.price | money }}</p>
+{% endfor %}
+{% for tax_line in order.tax_lines %}
+<p>Tax ({{ tax_line.title }}): {{ tax_line.price | money }}</p>
+{% endfor %}
+<p style="font-size: 1.2rem; font-weight: 700; margin-top: 1rem;">Total: {{ order.total_price | money }}</p>
+</div>
+
+<div style="margin-top: 3rem;">
+<a href="/account" class="btn btn--secondary">â† Back to Account</a>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<div class="search-overlay" aria-label="Search">
+<button class="search-overlay__close" aria-label="Close search">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<line x1="18" y1="6" x2="6" y2="18"/>
+<line x1="6" y1="6" x2="18" y2="18"/>
+</svg>
+</button>
+
+<div class="search-overlay__inner">
+<form action="{{ routes.search_url }}" method="get" role="search">
+<div class="search-overlay__input-wrap">
+<input 
+type="search" 
+name="q" 
+class="search-overlay__input" 
+placeholder="Search..." 
+autocomplete="off"
+aria-label="Search"
+>
+</div>
+</form>
+
+<div class="search-overlay__suggestions">
+<div class="search-overlay__suggestions-title">Popular Searches</div>
+<div class="search-overlay__suggestions-list">
+<a href="/search?q=new+arrivals" class="search-overlay__suggestion">New Arrivals</a>
+<a href="/search?q=best+sellers" class="search-overlay__suggestion">Best Sellers</a>
+<a href="/search?q=sale" class="search-overlay__suggestion">Sale</a>
+<a href="/search?q=dresses" class="search-overlay__suggestion">Dresses</a>
+<a href="/search?q=accessories" class="search-overlay__suggestion">Accessories</a>
+</div>
+</div>
+</div>
+</div>

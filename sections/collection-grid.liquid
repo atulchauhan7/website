@@ -1,0 +1,35 @@
+<section class="section" data-section-id="{{ section.id }}">
+<div class="container">
+<div class="section-header" data-animate="fade-up">
+{% if section.settings.subtitle != blank %}
+<div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
+{% endif %}
+<h2 class="section-header__title">{{ section.settings.title }}</h2>
+</div>
+
+<div class="grid grid--{{ section.blocks.size | at_most: 4 }}" data-animate-stagger>
+{% for block in section.blocks %}
+<a href="{{ block.settings.link }}" class="collection-card tilt-effect" data-animate="fade-up" {{ block.shopify_attributes }}>
+{% if block.settings.image != blank %}
+<img 
+class="collection-card__image" 
+src="{{ block.settings.image | image_url: width: 800 }}" 
+alt="{{ block.settings.title }}"
+loading="lazy"
+>
+{% else %}
+{{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'collection-card__image placeholder-svg' }}
+{% endif %}
+<div class="collection-card__overlay">
+<h3 class="collection-card__title">{{ block.settings.title }}</h3>
+<span class="collection-card__count">{{ block.settings.subtitle }}</span>
+</div>
+</a>
+{% endfor %}
+</div>
+</div>
+</section>
+
+{% schema %}
+{"name":"Collection Grid","max_blocks":6,"settings":[{"type":"text","id":"subtitle","label":"Subtitle","default":"Browse"},{"type":"text","id":"title","label":"Title","default":"Shop by Category"}],"blocks":[{"type":"collection","name":"Collection","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title","default":"Collection"},{"type":"text","id":"subtitle","label":"Subtitle","default":"Shop Now â†’"},{"type":"url","id":"link","label":"Link"}]}],"presets":[{"name":"Collection Grid","blocks":[{"type":"collection","settings":{"title":"New Arrivals","subtitle":"Shop Now â†’"}},{"type":"collection","settings":{"title":"Best Sellers","subtitle":"Shop Now â†’"}},{"type":"collection","settings":{"title":"Sale","subtitle":"Shop Now â†’"}}]}]}
+{% endschema %}

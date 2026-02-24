@@ -1,0 +1,32 @@
+<section class="section--no-padding image-text {% if section.settings.reverse %}image-text--reversed{% endif %}" data-section-id="{{ section.id }}">
+<div class="image-text__media image-reveal" data-animate="fade-in">
+{% if section.settings.image != blank %}
+<img 
+src="{{ section.settings.image | image_url: width: 1200 }}" 
+alt="{{ section.settings.heading }}"
+loading="lazy"
+>
+{% else %}
+{{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}
+</div>
+
+<div class="image-text__content">
+{% if section.settings.subtitle != blank %}
+<div class="section-header__subtitle" data-animate="fade-up">{{ section.settings.subtitle }}</div>
+{% endif %}
+<h2 data-animate="fade-up" data-animate-delay="200">{{ section.settings.heading }}</h2>
+<p data-animate="fade-up" data-animate-delay="400">{{ section.settings.text }}</p>
+{% if section.settings.button_label != blank %}
+<div data-animate="fade-up" data-animate-delay="600">
+<a href="{{ section.settings.button_link }}" class="btn btn--primary ripple-effect magnetic-btn">
+{{ section.settings.button_label }}
+</a>
+</div>
+{% endif %}
+</div>
+</section>
+
+{% schema %}
+{"name":"Image with Text","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"subtitle","label":"Subtitle","default":"Our Story"},{"type":"text","id":"heading","label":"Heading","default":"Crafted with Purpose"},{"type":"richtext","id":"text","label":"Text","default":"\u003cp\u003eEvery piece in our collection is thoughtfully designed and meticulously crafted. We believe in creating products that stand the test of time, both in quality and style.\u003c/p\u003e"},{"type":"text","id":"button_label","label":"Button label","default":"Learn More"},{"type":"url","id":"button_link","label":"Button link"},{"type":"checkbox","id":"reverse","label":"Reverse layout","default":false}],"presets":[{"name":"Image with Text"}]}
+{% endschema %}

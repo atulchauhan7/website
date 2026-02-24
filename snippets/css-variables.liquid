@@ -1,0 +1,19 @@
+<style>
+:root {
+--color-accent: {{ settings.accent_color }};
+--color-accent-dark: {{ settings.accent_color_dark | default: settings.accent_color | color_darken: 15 }};
+--color-accent-rgb: {{ settings.accent_color | color_extract: 'red' }}, {{ settings.accent_color | color_extract: 'green' }}, {{ settings.accent_color | color_extract: 'blue' }};
+--color-text: {{ settings.text_color | default: '#1a1a1a' }};
+--color-text-muted: {{ settings.text_muted_color | default: '#777777' }};
+--color-heading: {{ settings.heading_color | default: '#111111' }};
+--color-background: {{ settings.background_color | default: '#ffffff' }};
+--color-surface: {{ settings.surface_color | default: '#f8f7f5' }};
+--color-border: {{ settings.border_color | default: '#e8e6e1' }};
+--font-heading: {{ settings.heading_font.family | default: "'Playfair Display'" }}, serif;
+--font-body: {{ settings.body_font.family | default: "'Inter'" }}, sans-serif;
+--border-radius: {{ settings.border_radius | default: 4 }}px;
+--container-width: {{ settings.container_width | default: '1280px' }};
+--grid-gutter: {{ settings.grid_gutter | default: '24px' }};
+--section-spacing: {{ settings.section_spacing | default: 80 }}px;
+}
+</style>

@@ -1,0 +1,90 @@
+<div class="product-card shine-effect">
+<a href="{{ product.url }}" class="product-card__media">
+{% if product.featured_image != blank %}
+<img 
+class="product-card__image" 
+src="{{ product.featured_image | image_url: width: 600 }}" 
+alt="{{ product.featured_image.alt | escape }}"
+loading="lazy"
+width="600"
+height="800"
+>
+{% else %}
+{{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder-svg' }}
+{% endif %}
+
+{% if product.images.size > 1 %}
+<img 
+class="product-card__image product-card__image--hover" 
+src="{{ product.images[1] | image_url: width: 600 }}" 
+alt="{{ product.images[1].alt | escape }}"
+loading="lazy"
+>
+{% endif %}
+
+{% if product.available == false %}
+<span class="product-card__badge">Sold Out</span>
+{% elsif product.compare_at_price > product.price %}
+<span class="product-card__badge product-card__badge--sale">
+Sale -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+</span>
+{% elsif product.tags contains 'new' %}
+<span class="product-card__badge">New</span>
+{% endif %}
+
+<div class="product-card__actions">
+<button class="product-card__action-btn" aria-label="Quick view" data-quick-view="{{ product.url }}">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+<circle cx="12" cy="12" r="3"/>
+</svg>
+</button>
+<button class="product-card__action-btn" aria-label="Add to wishlist">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+</svg>
+</button>
+{% if product.available and product.variants.size == 1 %}
+<button class="product-card__action-btn" aria-label="Add to cart" data-quick-add="{{ product.variants.first.id }}">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+<line x1="3" y1="6" x2="21" y2="6"/>
+<path d="M16 10a4 4 0 0 1-8 0"/>
+</svg>
+</button>
+{% endif %}
+</div>
+</a>
+
+<div class="product-card__info">
+{% if product.vendor != blank %}
+<div class="product-card__vendor">{{ product.vendor }}</div>
+{% endif %}
+<a href="{{ product.url }}">
+<h3 class="product-card__title">{{ product.title }}</h3>
+</a>
+<div class="product-card__price">
+{% if product.compare_at_price > product.price %}
+<span class="product-card__price--sale">{{ product.price | money }}</span>
+<span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+{% else %}
+<span>{{ product.price | money }}</span>
+{% endif %}
+</div>
+
+{% if product.options.size > 0 and product.variants.size > 1 %}
+{% assign color_option = product.options_by_name['Color'] %}
+{% if color_option %}
+<div class="product-card__swatches">
+{% for value in color_option.values %}
+<span 
+class="product-card__swatch {% if forloop.first %}active{% endif %}" 
+style="background-color: {{ value | handleize }};"
+title="{{ value }}"
+></span>
+{% endfor %}
+</div>
+{% endif %}
+{% endif %}
+</div>
+</div>

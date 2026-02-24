@@ -1,0 +1,54 @@
+<div class="page-template">
+<div class="container">
+<div class="page-header" data-animate="fade-up">
+<h1>My Account</h1>
+<p class="text-muted">Welcome back, {{ customer.first_name }}!</p>
+</div>
+
+<div class="grid grid--2" style="gap: 3rem;" data-animate="fade-up">
+<div>
+<h3 style="margin-bottom: 1.5rem;">Order History</h3>
+{% if customer.orders.size > 0 %}
+{% for order in customer.orders %}
+<div style="padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); margin-bottom: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+<a href="{{ order.customer_url }}" style="font-weight: 600; color: var(--color-accent);">{{ order.name }}</a>
+<span style="font-size: 0.8rem; color: var(--color-text-muted);">{{ order.created_at | date: '%B %d, %Y' }}</span>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+<span>{{ order.financial_status_label }}</span>
+<span style="font-weight: 600;">{{ order.total_price | money }}</span>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<p class="text-muted">You haven't placed any orders yet.</p>
+<a href="/collections/all" class="btn btn--primary" style="margin-top: 1rem;">Start Shopping</a>
+{% endif %}
+</div>
+
+<div>
+<h3 style="margin-bottom: 1.5rem;">Account Details</h3>
+<div style="padding: 2rem; border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+<p><strong>{{ customer.name }}</strong></p>
+<p class="text-muted">{{ customer.email }}</p>
+{% if customer.default_address %}
+<div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+<p style="font-size: 0.9rem; color: var(--color-text-muted);">
+{{ customer.default_address.address1 }}<br>
+{% if customer.default_address.address2 != blank %}{{ customer.default_address.address2 }}<br>{% endif %}
+{{ customer.default_address.city }}, {{ customer.default_address.province }} {{ customer.default_address.zip }}<br>
+{{ customer.default_address.country }}
+</p>
+</div>
+{% endif %}
+<a href="/account/addresses" class="btn btn--secondary btn--small" style="margin-top: 1.5rem;">Manage Addresses</a>
+</div>
+
+<div style="margin-top: 2rem;">
+<a href="/account/logout" style="font-size: 0.85rem; color: var(--color-text-muted);">Log out â†’</a>
+</div>
+</div>
+</div>
+</div>
+</div>

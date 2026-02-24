@@ -1,0 +1,13 @@
+{% if section.settings.show_announcement %}
+<div class="announcement-bar marquee-pausable" role="banner">
+<div class="announcement-bar__marquee">
+{% for i in (1..6) %}
+<span>{{ section.settings.text }}</span>
+{% endfor %}
+</div>
+</div>
+{% endif %}
+
+{% schema %}
+{"name":"Announcement Bar","settings":[{"type":"checkbox","id":"show_announcement","label":"Show announcement bar","default":true},{"type":"text","id":"text","label":"Announcement text","default":"Free shipping on orders over $100 â€” Shop Now"},{"type":"url","id":"link","label":"Link"}]}
+{% endschema %}

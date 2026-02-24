@@ -1,0 +1,57 @@
+<div class="cart-drawer-overlay" aria-hidden="true"></div>
+<div class="cart-drawer" aria-label="Shopping cart">
+<div class="cart-drawer__header">
+<span class="cart-drawer__title">Your Cart ({{ cart.item_count }})</span>
+<button class="cart-drawer__close" aria-label="Close cart">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<line x1="18" y1="6" x2="6" y2="18"/>
+<line x1="6" y1="6" x2="18" y2="18"/>
+</svg>
+</button>
+</div>
+
+{% if cart.item_count > 0 %}
+<div class="cart-drawer__items">
+{% for item in cart.items %}
+<div class="cart-drawer__item" data-line="{{ forloop.index }}">
+<div class="cart-drawer__item-image">
+{% if item.image != blank %}
+<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy">
+{% endif %}
+</div>
+<div class="cart-drawer__item-info">
+<a href="{{ item.url }}" class="cart-drawer__item-title">{{ item.product.title }}</a>
+{% if item.variant.title != 'Default Title' %}
+<div class="cart-drawer__item-variant">{{ item.variant.title }}</div>
+{% endif %}
+<div class="cart-drawer__item-price">{{ item.final_line_price | money }}</div>
+<div class="cart-drawer__qty">
+<button data-qty-minus aria-label="Decrease quantity">âˆ’</button>
+<span>{{ item.quantity }}</span>
+<button data-qty-plus aria-label="Increase quantity">+</button>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<div class="cart-drawer__footer">
+<div class="cart-drawer__subtotal">
+<span>Subtotal</span>
+<span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
+</div>
+<a href="/checkout" class="btn btn--primary btn--full ripple-effect">Checkout</a>
+<p class="cart-drawer__note">Shipping & taxes calculated at checkout</p>
+</div>
+{% else %}
+<div class="cart-drawer__empty">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+<line x1="3" y1="6" x2="21" y2="6"/>
+<path d="M16 10a4 4 0 0 1-8 0"/>
+</svg>
+<p>Your cart is empty</p>
+<a href="/collections/all" class="btn btn--primary">Start Shopping</a>
+</div>
+{% endif %}
+</div>

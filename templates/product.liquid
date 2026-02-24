@@ -1,0 +1,170 @@
+<div class="product-page">
+<div class="container">
+<div class="product-page__grid">
+<div class="product-gallery" data-animate="fade-right">
+<div class="product-gallery__main">
+{% if product.featured_image != blank %}
+<img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}">
+{% else %}
+{{ 'product-1' | placeholder_svg_tag }}
+{% endif %}
+</div>
+{% if product.images.size > 1 %}
+<div class="product-gallery__thumbs">
+{% for image in product.images %}
+<div class="product-gallery__thumb {% if forloop.first %}active{% endif %}" data-full-image="{{ image | image_url: width: 1200 }}">
+<img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | escape }}" loading="lazy">
+</div>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+
+<div class="product-info" data-animate="fade-left">
+{% if product.vendor != blank %}
+<div class="product-info__vendor">{{ product.vendor }}</div>
+{% endif %}
+
+<h1 class="product-info__title">{{ product.title }}</h1>
+
+<div class="product-info__price-wrap">
+{% if product.compare_at_price > product.price %}
+<span class="product-info__price" style="color: #e74c3c;">{{ product.price | money }}</span>
+<span class="product-info__compare-price">{{ product.compare_at_price | money }}</span>
+<span class="product-info__save-badge">
+Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+</span>
+{% else %}
+<span class="product-info__price">{{ product.price | money }}</span>
+{% endif %}
+</div>
+
+{% if product.description != blank %}
+<div class="product-info__description">
+{{ product.description | truncate: 300 }}
+</div>
+{% endif %}
+
+{% form 'product', product, data-add-to-cart: true %}
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+{% unless product.has_only_default_variant %}
+<div class="product-info__options">
+{% for option in product.options_with_values %}
+<div class="product-option">
+<label class="product-option__label">{{ option.name }}</label>
+<div class="product-option__values">
+{% for value in option.values %}
+<span class="product-option__value {% if option.selected_value == value %}selected{% endif %}" data-option="{{ option.name }}" data-value="{{ value }}">
+{{ value }}
+</span>
+{% endfor %}
+</div>
+</div>
+{% endfor %}
+</div>
+{% endunless %}
+
+<div class="product-info__quantity">
+<label class="product-option__label">Quantity</label>
+<div class="quantity-selector">
+<button type="button" data-qty-minus>âˆ’</button>
+<input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+<button type="button" data-qty-plus>+</button>
+</div>
+</div>
+
+<div class="product-info__add-to-cart">
+<button type="submit" class="btn btn--primary btn--full btn--large ripple-effect" {% unless product.available %}disabled{% endunless %}>
+{% if product.available %}
+Add to Cart
+{% else %}
+Sold Out
+{% endif %}
+</button>
+</div>
+{% endform %}
+
+<div class="product-accordion">
+{% if product.description != blank %}
+<div class="accordion-item open">
+<button class="accordion-trigger" type="button">
+Description
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="accordion-content" style="max-height: 500px;">
+<div class="accordion-content__inner">
+{{ product.description }}
+</div>
+</div>
+</div>
+{% endif %}
+
+<div class="accordion-item">
+<button class="accordion-trigger" type="button">
+Shipping & Returns
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="accordion-content">
+<div class="accordion-content__inner">
+<p>Free standard shipping on all orders over $100. Express shipping available at checkout. 30-day hassle-free returns on all items.</p>
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<button class="accordion-trigger" type="button">
+Care Instructions
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="accordion-content">
+<div class="accordion-content__inner">
+<p>Please refer to the product label for specific care instructions. For best results, follow the recommended guidelines.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="product-info__meta">
+{% if product.vendor != blank %}
+<div class="product-info__meta-item">
+<strong>Brand:</strong> {{ product.vendor }}
+</div>
+{% endif %}
+<div class="product-info__meta-item">
+<strong>SKU:</strong> {{ product.selected_or_first_available_variant.sku | default: 'N/A' }}
+</div>
+<div class="product-info__meta-item">
+<strong>Type:</strong> {{ product.type | default: 'N/A' }}
+</div>
+{% if product.tags.size > 0 %}
+<div class="product-info__meta-item">
+<strong>Tags:</strong> {{ product.tags | join: ', ' }}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+"@context": "https://schema.org/",
+"@type": "Product",
+"name": {{ product.title | json }},
+"image": {{ product.featured_image | image_url: width: 1200 | json }},
+"description": {{ product.description | strip_html | truncate: 250 | json }},
+"brand": {
+"@type": "Brand",
+"name": {{ product.vendor | json }}
+},
+"offers": {
+"@type": "Offer",
+"url": {{ request.origin | append: product.url | json }},
+"priceCurrency": {{ cart.currency.iso_code | json }},
+"price": {{ product.price | money_without_currency | json }},
+"availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+}
+}
+</script>
