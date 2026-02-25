@@ -150,7 +150,8 @@ const loop=carousel.dataset.carouselLoop!=='false';
 const perView=parseInt(carousel.dataset.carouselPerView)||1;
 if(!track||!slides.length)return;
 const vp=carousel.querySelector('.carousel__viewport')||carousel;
-let idx=0,timer=null,dragging=false,startX=0,curTr=0,prevTr=0;
+let idx=0,timer=null,dragging=false,isDragged=false,startX=0,curTr=0,prevTr=0;
+var DRAG_THRESHOLD=8;
 function gpv(){if(window.innerWidth<=480)return Math.min(perView,1);if(window.innerWidth<=768)return Math.min(perView,2);if(window.innerWidth<=1024)return Math.min(perView,3);return perView}
 function gsw(){return vp.offsetWidth/gpv()}
 function ssw(){const w=gsw();slides.forEach(s=>{s.style.width=w+'px';s.style.flexShrink='0'})}
@@ -162,9 +163,10 @@ function go(i,sm){if(sm===undefined)sm=true;const mx=gmi();idx=loop?(i<0?mx:i>mx
 function next(){go(idx+1)}function prev(){go(idx-1)}
 function startAP(){if(!autoplay)return;stopAP();timer=setInterval(next,autoSpeed)}
 function stopAP(){if(timer){clearInterval(timer);timer=null}}
-function dStart(e){dragging=true;startX=e.type.includes('mouse')?e.pageX:e.touches[0].clientX;track.style.transition='none';track.style.cursor='grabbing';if(e.type.includes('mouse'))e.preventDefault();stopAP()}
-function dMove(e){if(!dragging)return;const cx=e.type.includes('mouse')?e.pageX:e.touches[0].clientX;curTr=prevTr+(cx-startX);track.style.transform='translate3d('+curTr+'px,0,0)'}
-function dEnd(){if(!dragging)return;dragging=false;track.style.cursor='';const mv=curTr-prevTr;if(Math.abs(mv)>gsw()/4){if(mv<0)next();else prev()}else go(idx);startAP()}
+function dStart(e){dragging=true;isDragged=false;startX=e.type.includes('mouse')?e.pageX:e.touches[0].clientX;track.style.transition='none';stopAP()}
+function dMove(e){if(!dragging)return;var cx=e.type.includes('mouse')?e.pageX:e.touches[0].clientX;if(!isDragged&&Math.abs(cx-startX)>DRAG_THRESHOLD){isDragged=true;track.style.cursor='grabbing'}if(isDragged){curTr=prevTr+(cx-startX);track.style.transform='translate3d('+curTr+'px,0,0)'}}
+function dEnd(){if(!dragging)return;dragging=false;track.style.cursor='';if(isDragged){var mv=curTr-prevTr;if(Math.abs(mv)>gsw()/4){if(mv<0)next();else prev()}else go(idx)}startAP()}
+track.addEventListener('click',function(e){if(isDragged){e.preventDefault();e.stopPropagation();isDragged=false}},true);
 if(prevBtn)prevBtn.addEventListener('click',()=>{prev();stopAP();startAP()});
 if(nextBtn)nextBtn.addEventListener('click',()=>{next();stopAP();startAP()});
 track.addEventListener('touchstart',dStart,{passive:true});track.addEventListener('touchmove',dMove,{passive:true});track.addEventListener('touchend',dEnd);
