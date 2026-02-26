@@ -8,7 +8,7 @@
 <div class="cart-head"><span>Product</span></div>
 <div class="cart-items">
 {% for item in cart.items %}
-<div class="cart-item">
+<div class="cart-item" data-line="{{ forloop.index }}">
 <div class="cart-item__img">
 {% if item.image != blank %}
 <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" width="80" height="100">

@@ -39,7 +39,7 @@ data-animate="fade-up" data-animate-delay="200">
 <p class="testimonial-card__text">{{ block.settings.text }}</p>
 <div class="testimonial-card__author">
 {% if block.settings.avatar != blank %}
-<img class="testimonial-card__avatar" src="{{ block.settings.avatar | image_url: width: 100 }}" alt="{{ block.settings.name }}" loading="lazy">
+<img class="testimonial-card__avatar" src="{{ block.settings.avatar | image_url: width: 100 }}" alt="{{ block.settings.name }}" loading="lazy" width="100" height="100">
 {% else %}
 <div class="testimonial-card__avatar-placeholder">
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

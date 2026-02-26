@@ -9,7 +9,7 @@
 {% unless collection.handle == 'frontpage' %}
 <a href="{{ collection.url }}" class="collection-card" data-animate="fade-up">
 {% if collection.image != blank %}
-<img class="collection-card__image" src="{{ collection.image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" loading="lazy">
+<img class="collection-card__image" src="{{ collection.image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" loading="lazy" width="800" height="{{ 800 | divided_by: collection.image.aspect_ratio | round }}">
 {% else %}
 {{ 'collection-1' | placeholder_svg_tag: 'collection-card__image placeholder-svg' }}
 {% endif %}

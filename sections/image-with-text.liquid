@@ -5,6 +5,8 @@
 src="{{ section.settings.image | image_url: width: 1200 }}" 
 alt="{{ section.settings.heading }}"
 loading="lazy"
+width="1200"
+height="{{ 1200 | divided_by: section.settings.image.aspect_ratio | round }}"
 >
 {% else %}
 {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}

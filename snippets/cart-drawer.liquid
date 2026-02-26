@@ -16,7 +16,7 @@
 <div class="cart-drawer__item" data-line="{{ forloop.index }}">
 <div class="cart-drawer__item-image">
 {% if item.image != blank %}
-<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy">
+<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" width="200" height="{{ 200 | divided_by: item.image.aspect_ratio | round }}">
 {% endif %}
 </div>
 <div class="cart-drawer__item-info">
