@@ -6,7 +6,7 @@
 <span></span>
 <span></span>
 </button>
-<a href="/" class="site-header__logo">
+<a href="{{ routes.root_url }}" class="site-header__logo">
 {% if section.settings.logo != blank %}
 <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" loading="eager" width="200" height="40">
 {% else %}

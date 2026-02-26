@@ -22,7 +22,7 @@
 {% endfor %}
 {% else %}
 <p class="text-muted">You haven't placed any orders yet.</p>
-<a href="/collections/all" class="btn btn--primary mt-1">Start Shopping</a>
+<a href="{{ routes.all_products_collection_url }}" class="btn btn--primary mt-1">Start Shopping</a>
 {% endif %}
 </div>
 <div>
@@ -40,10 +40,10 @@
 </p>
 </div>
 {% endif %}
-<a href="/account/addresses" class="btn btn--secondary btn--small mt-2">Manage Addresses</a>
+<a href="{{ routes.account_addresses_url }}" class="btn btn--secondary btn--small mt-2">Manage Addresses</a>
 </div>
 <div class="mt-2">
-<a href="/account/logout" class="text-muted" style="font-size:.85rem">Log out &rarr;</a>
+<a href="{{ routes.account_logout_url }}" class="text-muted" style="font-size:.85rem">Log out &rarr;</a>
 </div>
 </div>
 </div>
