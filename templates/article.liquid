@@ -6,7 +6,7 @@
 <h1>{{ article.title }}</h1>
 </div>
 {% if article.image != blank %}
-<div class="image-reveal mb-3" style="border-radius:var(--border-radius);overflow:hidden">
+<div class="mb-3" style="border-radius:var(--border-radius);overflow:hidden">
 <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}" loading="lazy" width="1200" height="630">
 </div>
 {% endif %}
@@ -38,7 +38,7 @@
 <label class="form-label" for="comment-body">Comment</label>
 <textarea class="form-textarea" id="comment-body" name="comment[body]" required></textarea>
 </div>
-<button type="submit" class="btn btn--primary ripple-effect">Post Comment</button>
+<button type="submit" class="btn btn--primary">Post Comment</button>
 </div>
 {% endform %}
 </div>

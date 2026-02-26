@@ -45,17 +45,18 @@ Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_b
 </div>
 {% endif %}
 
-{% form 'product', product, data-add-to-cart: true %}
+{% form 'product', product, data-add-to-cart: true, data-product-form: true %}
 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
 {% unless product.has_only_default_variant %}
+<script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 <div class="product-info__options">
 {% for option in product.options_with_values %}
-<div class="product-option">
+<div class="product-option" data-option-index="{{ forloop.index0 }}">
 <label class="product-option__label">{{ option.name }}</label>
 <div class="product-option__values">
 {% for value in option.values %}
-<span class="product-option__value {% if option.selected_value == value %}selected{% endif %}" data-option="{{ option.name }}" data-value="{{ value }}">
+<span class="product-option__value {% if option.selected_value == value %}selected{% endif %}" data-option-index="{{ forloop.index0 }}" data-value="{{ value }}">
 {{ value }}
 </span>
 {% endfor %}
@@ -75,7 +76,7 @@ Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_b
 </div>
 
 <div class="product-info__add-to-cart">
-<button type="submit" class="btn btn--primary btn--full btn--large ripple-effect" {% unless product.available %}disabled{% endunless %}>
+<button type="submit" class="btn btn--primary btn--full btn--large" {% unless product.available %}disabled{% endunless %}>
 {% if product.available %}
 Add to Cart
 {% else %}
