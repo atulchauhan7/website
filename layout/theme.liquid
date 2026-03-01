@@ -50,11 +50,12 @@ h1{font-size:clamp(2rem,4vw,3.5rem)}
 </style>
 
 <!-- Main stylesheet with high priority -->
-<link rel="preload" href="{{ 'luxe-theme.css' | asset_url }}" as="style">
+{{ 'luxe-theme.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'luxe-theme.css' | asset_url | stylesheet_tag }}
 
 <!-- Animations CSS loaded async (non-render-blocking) -->
-<link rel="preload" href="{{ 'luxe-animations.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+{{ 'luxe-animations.css' | asset_url | preload_tag: as: 'style' }}
+<link rel="stylesheet" href="{{ 'luxe-animations.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'luxe-animations.css' | asset_url | stylesheet_tag }}</noscript>
 
 {% assign heading_font = settings.heading_font %}
@@ -89,7 +90,7 @@ window.addEventListener('load', function(){
 {% endif %}
 
 <!-- Preload main JS -->
-<link rel="preload" href="{{ 'luxe-theme.js' | asset_url }}" as="script">
+{{ 'luxe-theme.js' | asset_url | preload_tag: as: 'script' }}
 </head>
 
 <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}" data-animations-enabled="{{ settings.enable_animations }}">
