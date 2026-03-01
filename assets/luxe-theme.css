@@ -876,4 +876,4 @@ p{margin-bottom:1rem}
 }
 
 /* === PERFORMANCE: content-visibility for off-screen sections === */
-.shopify-section{content-visibility:auto;contain-intrinsic-size:auto 500px}
+.shopify-section:not(#shopify-section-header):not(#shopify-section-announcement-bar):not(#shopify-section-footer){content-visibility:auto;contain-intrinsic-size:auto 500px}
