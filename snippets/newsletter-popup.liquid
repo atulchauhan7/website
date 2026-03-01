@@ -1,5 +1,5 @@
 <div class="newsletter-popup-overlay">
-<div class="newsletter-popup">
+<div class="newsletter-popup" role="dialog" aria-modal="true" aria-label="Newsletter signup">
 <button class="newsletter-popup__close" aria-label="Close popup">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
 </button>
@@ -10,7 +10,7 @@
 {% form 'customer' %}
 <input type="hidden" name="contact[tags]" value="newsletter, popup">
 <div class="newsletter__form mb-1">
-<input type="email" name="contact[email]" class="newsletter__input" placeholder="Your email address" required>
+<input type="email" name="contact[email]" id="newsletter-popup-email" class="newsletter__input" placeholder="Your email address" required aria-label="Email address">
 <button type="submit" class="newsletter__submit">Get 15% Off</button>
 </div>
 {% endform %}

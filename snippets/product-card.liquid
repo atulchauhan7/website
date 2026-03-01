@@ -114,7 +114,7 @@ data-product-image="{% if product.featured_image != blank %}{{ product.featured_
 {% for value in color_option.values %}
 <span 
 class="product-card__swatch {% if forloop.first %}active{% endif %}" 
-style="background-color: {{ value | handleize }};"
+style="background-color: {{ value | downcase }};"
 title="{{ value | escape }}"
 ></span>
 {% endfor %}

@@ -5,9 +5,11 @@
 <div class="hero-slide {% if forloop.first %}hero-slide--active{% endif %}" {{ block.shopify_attributes }}>
 <div class="hero-slide__media">
 {% if block.settings.video != blank %}
+{% # theme-check-disable RemoteAsset %}
 <video autoplay muted loop playsinline data-autoplay-scroll preload="metadata">
 <source src="{{ block.settings.video }}" type="video/mp4">
 </video>
+{% # theme-check-enable RemoteAsset %}
 {% elsif block.settings.image != blank %}
 <img
 src="{{ block.settings.image | image_url: width: 1200 }}"

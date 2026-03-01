@@ -69,7 +69,7 @@ Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_b
 <label class="product-option__label">{{ option.name }}</label>
 <div class="product-option__values">
 {% for value in option.values %}
-<span class="product-option__value {% if option.selected_value == value %}selected{% endif %}" data-option-index="{{ forloop.index0 }}" data-value="{{ value }}">
+<span class="product-option__value {% if option.selected_value == value %}selected{% endif %}" data-option-index="{{ forloop.index0 }}" data-value="{{ value }}" role="button" tabindex="0" aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">
 {{ value }}
 </span>
 {% endfor %}
@@ -102,7 +102,7 @@ Sold Out
 <div class="product-accordion">
 {% if product.description != blank %}
 <div class="accordion-item open">
-<button class="accordion-trigger" type="button">
+<button class="accordion-trigger" type="button" aria-expanded="true">
 Description
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
 </button>
@@ -115,7 +115,7 @@ Description
 {% endif %}
 
 <div class="accordion-item">
-<button class="accordion-trigger" type="button">
+<button class="accordion-trigger" type="button" aria-expanded="false">
 Shipping & Returns
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
 </button>
@@ -127,7 +127,7 @@ Shipping & Returns
 </div>
 
 <div class="accordion-item">
-<button class="accordion-trigger" type="button">
+<button class="accordion-trigger" type="button" aria-expanded="false">
 Care Instructions
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
 </button>
@@ -177,7 +177,7 @@ Care Instructions
 "@type": "Offer",
 "url": {{ request.origin | append: product.url | json }},
 "priceCurrency": {{ cart.currency.iso_code | json }},
-"price": {{ product.price | money_without_currency | json }},
+"price": {{ product.price | divided_by: 100.0 }},
 "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
 }
 }

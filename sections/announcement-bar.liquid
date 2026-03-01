@@ -1,9 +1,10 @@
 {% if section.settings.show_announcement %}
 <div class="announcement-bar marquee-pausable" role="banner">
 {% if section.settings.link != blank %}<a href="{{ section.settings.link }}" class="announcement-bar__link">{% endif %}
-<div class="announcement-bar__marquee">
-{% for i in (1..6) %}
+<div class="announcement-bar__marquee" aria-live="off">
 <span>{{ section.settings.text }}</span>
+{% for i in (2..6) %}
+<span aria-hidden="true">{{ section.settings.text }}</span>
 {% endfor %}
 </div>
 {% if section.settings.link != blank %}</a>{% endif %}

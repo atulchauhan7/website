@@ -1,5 +1,5 @@
 <div class="cart-drawer-overlay" aria-hidden="true"></div>
-<div class="cart-drawer" aria-label="Shopping cart">
+<div class="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
 <div class="cart-drawer__header">
 <span class="cart-drawer__title">Your Cart ({{ cart.item_count }})</span>
 <button class="cart-drawer__close" aria-label="Close cart">
@@ -13,7 +13,7 @@
 {% if cart.item_count > 0 %}
 <div class="cart-drawer__items">
 {% for item in cart.items %}
-<div class="cart-drawer__item" data-line="{{ forloop.index }}">
+<div class="cart-drawer__item" data-line="{{ forloop.index }}" data-key="{{ item.key }}">
 <div class="cart-drawer__item-image">
 {% if item.image != blank %}
 <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy" width="200" height="{{ 200 | divided_by: item.image.aspect_ratio | round }}">
@@ -55,3 +55,10 @@
 </div>
 {% endif %}
 </div>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": []
+}
+{% endschema %}
