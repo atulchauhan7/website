@@ -519,7 +519,7 @@ if(!m||!p||!i)return;
 /* Clone to remove stale listeners */
 var newM=m.cloneNode(true);m.parentNode.replaceChild(newM,m);m=newM;
 var newP=p.cloneNode(true);p.parentNode.replaceChild(newP,p);p=newP;
-function setLoading(state){i.disabled=state;m.disabled=state;p.disabled=state;if(state)item.style.opacity='0.5';else item.style.opacity='1'}
+function setLoading(state){i.disabled=state;m.disabled=state;p.disabled=state;if(state){item.style.opacity='0.5'}else{item.removeAttribute('style');m.blur();p.blur()}}
 function updateCartLine(qty){
 setLoading(true);
 fetch(window.theme.routes.cart_change_url+'.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:key,quantity:qty})})
