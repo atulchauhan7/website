@@ -115,7 +115,7 @@ p{margin-bottom:1rem}
 /* Header icons — unified size for all icons including menu toggle */
 .header-icon{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--color-text);transition:color 0.3s}
 .header-icon:hover{color:var(--color-accent)}
-.header-icon svg{width:24px;height:24px}
+.header-icon svg{width:26px;height:26px}
 .cart-count{position:absolute;top:2px;right:0px;background:var(--color-accent);color:#fff;min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;box-sizing:border-box;pointer-events:none}
 
 /* Mobile menu toggle */
@@ -138,7 +138,7 @@ p{margin-bottom:1rem}
   .site-header__logo{font-size:1.2rem;letter-spacing:0.15em}
   .site-header__right{gap:0.25rem}
   .header-icon{width:40px;height:40px}
-  .header-icon svg{width:22px;height:22px}
+  .header-icon svg{width:24px;height:24px}
 }
 
 @media(max-width:480px){
@@ -146,7 +146,7 @@ p{margin-bottom:1rem}
   .site-header.scrolled .site-header__inner{padding:8px 12px}
   .site-header__logo{font-size:1rem;letter-spacing:0.12em}
   .header-icon{width:36px;height:36px}
-  .header-icon svg{width:20px;height:20px}
+  .header-icon svg{width:22px;height:22px}
   .site-header__left{gap:0.15rem}
   .site-header__right{gap:0.15rem}
 }
