@@ -1,11 +1,27 @@
 <header class="site-header {% if section.settings.show_announcement %}has-announcement{% endif %}" data-header>
 <div class="site-header__inner">
+
 <div class="site-header__left">
 <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
 <span></span>
 <span></span>
 <span></span>
 </button>
+<button class="header-icon" data-search-trigger aria-label="Search">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<circle cx="11" cy="11" r="8"/>
+<path d="M21 21l-4.35-4.35"/>
+</svg>
+</button>
+<a href="{{ routes.account_url }}" class="header-icon header-icon--desktop-only" aria-label="Account">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+<circle cx="12" cy="7" r="4"/>
+</svg>
+</a>
+</div>
+
+<div class="site-header__center">
 <a href="{{ routes.root_url }}" class="site-header__logo">
 {% if section.settings.logo != blank %}
 <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name | escape }}" loading="eager" width="200" height="40">
@@ -13,6 +29,25 @@
 {{ shop.name }}
 {% endif %}
 </a>
+</div>
+
+<div class="site-header__right">
+<button class="header-icon" data-wishlist-trigger aria-label="Wishlist">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+</svg>
+<span class="wishlist-count-badge" style="display:none;"></span>
+</button>
+<button class="header-icon" data-cart-trigger aria-label="Cart">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+<line x1="3" y1="6" x2="21" y2="6"/>
+<path d="M16 10a4 4 0 0 1-8 0"/>
+</svg>
+<span class="cart-count">{{ cart.item_count }}</span>
+</button>
+</div>
+
 </div>
 
 <nav class="site-header__nav" role="navigation" aria-label="Main navigation">
@@ -42,38 +77,6 @@
 {% endfor %}
 </nav>
 
-<div class="site-header__actions">
-<button class="header-icon" data-search-trigger aria-label="Search">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-<circle cx="11" cy="11" r="8"/>
-<path d="M21 21l-4.35-4.35"/>
-</svg>
-</button>
-
-<a href="{{ routes.account_url }}" class="header-icon" aria-label="Account">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-<circle cx="12" cy="7" r="4"/>
-</svg>
-</a>
-
-<button class="header-icon" data-wishlist-trigger aria-label="Wishlist">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-</svg>
-<span class="wishlist-count-badge" style="display:none;"></span>
-</button>
-
-<button class="header-icon" data-cart-trigger aria-label="Cart">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-<line x1="3" y1="6" x2="21" y2="6"/>
-<path d="M16 10a4 4 0 0 1-8 0"/>
-</svg>
-<span class="cart-count">{{ cart.item_count }}</span>
-</button>
-</div>
-</div>
 </header>
 
 {% schema %}
