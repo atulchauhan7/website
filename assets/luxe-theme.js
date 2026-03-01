@@ -24,7 +24,6 @@ function handleHeaderScroll(){
 const cs=window.pageYOffset||document.documentElement.scrollTop;
 if(header){
 header.classList.toggle('scrolled',cs>50);
-if(cs>300){if(cs>lastScroll+5)header.classList.add('header-hidden');else if(cs<lastScroll-5)header.classList.remove('header-hidden')}else header.classList.remove('header-hidden');
 if(announcementBar){if(cs>150){announcementBar.classList.add('announcement-hidden');header.classList.remove('has-announcement')}else{announcementBar.classList.remove('announcement-hidden');header.classList.add('has-announcement')}}
 }
 lastScroll=cs;

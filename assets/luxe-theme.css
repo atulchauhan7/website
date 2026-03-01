@@ -82,10 +82,9 @@ p{margin-bottom:1rem}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* === HEADER === */
-.site-header{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:all 0.3s ease;padding:0}
-.site-header.header-hidden{transform:translateY(-100%)}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:top 0.3s ease;padding:0}
 .site-header.has-announcement{top:34px}
-.site-header__inner{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:all 0.3s ease;border-bottom:1px solid transparent}
+.site-header__inner{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:padding 0.3s ease,border-bottom-color 0.3s ease,box-shadow 0.3s ease;border-bottom:1px solid transparent}
 .site-header.scrolled .site-header__inner{padding:10px 40px;border-bottom-color:var(--color-border);box-shadow:0 2px 20px rgba(0,0,0,0.05)}
 .site-header__left{display:flex;align-items:center;gap:1rem}
 .site-header__logo{font-family:var(--font-heading);font-size:1.6rem;font-weight:700;letter-spacing:0.02em;color:var(--color-heading)}
@@ -96,11 +95,11 @@ p{margin-bottom:1rem}
 .site-header__nav-link{font-size:0.8rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;position:relative;padding:4px 0;display:inline-flex;align-items:center;gap:4px;transition:color 0.3s}
 .site-header__nav-link:hover,.site-header__nav-link.active{color:var(--color-accent)}
 .nav-arrow{transition:transform 0.3s}
-.nav-item{position:relative}
+.nav-item{position:static}
 .nav-item:hover .nav-arrow{transform:rotate(180deg)}
 
 /* Mega menu */
-.mega-menu{position:absolute;top:100%;left:0;width:100%;background:#fff;padding:2rem 40px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:all 0.3s ease;box-shadow:0 10px 40px rgba(0,0,0,0.08);border-top:1px solid var(--color-border)}
+.mega-menu{position:absolute;top:100%;left:0;right:0;background:#fff;padding:2rem 40px;opacity:0;visibility:hidden;transform:translateY(-5px);transition:all 0.3s ease;box-shadow:0 10px 40px rgba(0,0,0,0.08);border-top:1px solid var(--color-border)}
 .nav-item:hover .mega-menu{opacity:1;visibility:visible;transform:translateY(0)}
 .mega-menu__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:var(--container-width);margin:0 auto}
 .mega-menu__column-title{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-bottom:0.75rem;color:var(--color-heading);display:block}
