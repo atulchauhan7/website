@@ -15,9 +15,14 @@
 <div class="cat-card__media">
 {% if block.settings.image != blank %}
 <img
-src="{{ block.settings.image | image_url: width: 1000 }}"
-alt="{{ block.settings.title }}"
+src="{{ block.settings.image | image_url: width: 700 }}"
+srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+{{ block.settings.image | image_url: width: 700 }} 700w,
+{{ block.settings.image | image_url: width: 1000 }} 1000w"
+sizes="(max-width: 768px) 100vw, 50vw"
+alt="{{ block.settings.title | escape }}"
 loading="lazy"
+decoding="async"
 width="1000"
 height="1200"
 >

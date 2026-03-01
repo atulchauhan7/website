@@ -6,9 +6,14 @@
 <div class="image-banner__media">
 {% if block.settings.image != blank %}
 <img
-src="{{ block.settings.image | image_url: width: 1000 }}"
+src="{{ block.settings.image | image_url: width: 700 }}"
+srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+{{ block.settings.image | image_url: width: 700 }} 700w,
+{{ block.settings.image | image_url: width: 1000 }} 1000w"
+sizes="(max-width: 768px) 100vw, {% if section.blocks.size == 1 %}100vw{% elsif section.blocks.size == 2 %}50vw{% else %}33vw{% endif %}"
 alt="{{ block.settings.heading | escape }}"
 loading="lazy"
+decoding="async"
 width="1000"
 height="600"
 >

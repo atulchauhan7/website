@@ -6,7 +6,7 @@
 <div class="page-content text-center" data-animate="fade-up" style="max-width:480px">
 <div class="gift-wrap">
 {% if gift_card.image %}
-<img src="{{ gift_card.image | image_url: width: 400 }}" alt="Gift card" loading="lazy" width="300" height="190">
+<img src="{{ gift_card.image | image_url: width: 400 }}" alt="{{ shop.name | escape }} gift card" loading="lazy" width="300" height="190">
 {% endif %}
 <h2 class="mb-1">{{ gift_card.balance | money }}</h2>
 {% if gift_card.enabled %}
@@ -19,7 +19,7 @@
 <p class="gift-exp">Expires on {{ gift_card.expires_on | date: '%B %d, %Y' }}</p>
 {% endif %}
 </div>
-<a href="{{ shop.url }}" class="btn btn--primary">Start Shopping</a>
+<a href="{{ routes.root_url }}" class="btn btn--primary">Start Shopping</a>
 </div>
 </div>
 </div>

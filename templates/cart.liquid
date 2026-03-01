@@ -22,9 +22,10 @@
 <div class="cart-item__price">{{ item.final_price | money }}</div>
 <div class="quantity-selector mt-1">
 <button type="button" data-qty-minus>&#8722;</button>
-<input type="number" value="{{ item.quantity }}" min="1" aria-label="Quantity">
+<input type="number" value="{{ item.quantity }}" min="0" aria-label="Quantity">
 <button type="button" data-qty-plus>+</button>
 </div>
+<a href="{{ item.url_to_remove }}" class="cart-item__remove" style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem; display: inline-block;">Remove</a>
 </div>
 <div class="cart-item__total">{{ item.final_line_price | money }}</div>
 </div>

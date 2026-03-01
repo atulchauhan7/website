@@ -65,6 +65,60 @@
 {{ address.city }}, {{ address.province }} {{ address.zip }}<br>
 {{ address.country }}
 </p>
+<div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+<button type="button" class="btn btn--secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" data-toggle-address="edit-address-{{ address.id }}">Edit</button>
+{% unless address == customer.default_address %}
+<button type="button" class="btn btn--secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" data-delete-address="{{ address.id }}">Delete</button>
+{% endunless %}
+</div>
+<div id="edit-address-{{ address.id }}" style="display:none; margin-top: 1.5rem;">
+{% form 'customer_address', address %}
+<div class="grid grid--2">
+<div class="form-group">
+<label class="form-label">First Name</label>
+<input class="form-input" type="text" name="address[first_name]" value="{{ address.first_name }}">
+</div>
+<div class="form-group">
+<label class="form-label">Last Name</label>
+<input class="form-input" type="text" name="address[last_name]" value="{{ address.last_name }}">
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Address</label>
+<input class="form-input" type="text" name="address[address1]" value="{{ address.address1 }}">
+</div>
+<div class="form-group">
+<label class="form-label">Apartment, Suite, etc.</label>
+<input class="form-input" type="text" name="address[address2]" value="{{ address.address2 }}">
+</div>
+<div class="grid grid--2">
+<div class="form-group">
+<label class="form-label">City</label>
+<input class="form-input" type="text" name="address[city]" value="{{ address.city }}">
+</div>
+<div class="form-group">
+<label class="form-label">Zip / Postal Code</label>
+<input class="form-input" type="text" name="address[zip]" value="{{ address.zip }}">
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Country</label>
+<select class="form-input" name="address[country]" data-default="{{ address.country }}">{{ all_country_option_tags }}</select>
+</div>
+<div class="form-group">
+<label class="form-label">Province / State</label>
+<select class="form-input" name="address[province]" data-default="{{ address.province }}"></select>
+</div>
+<div class="form-group">
+<label class="form-label">Phone</label>
+<input class="form-input" type="tel" name="address[phone]" value="{{ address.phone }}">
+</div>
+<div class="form-actions">
+<button type="submit" class="btn btn--primary">Save</button>
+<button type="button" class="btn btn--secondary" data-toggle-address="edit-address-{{ address.id }}">Cancel</button>
+</div>
+{% endform %}
+</div>
 </div>
 {% endfor %}
 <div class="mt-2">
@@ -73,3 +127,23 @@
 </div>
 </div>
 </div>
+
+<script>
+(function(){
+document.querySelectorAll('[data-delete-address]').forEach(function(btn){
+btn.addEventListener('click', function(){
+if(confirm('Are you sure you want to delete this address?')){
+var id = this.getAttribute('data-delete-address');
+Shopify.postLink('/account/addresses/' + id, {parameters: {_method: 'delete'}});
+}
+});
+});
+/* Pre-select country in edit forms */
+document.querySelectorAll('select[name="address[country]"][data-default]').forEach(function(sel){
+var val = sel.getAttribute('data-default');
+if(val){
+for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===val||sel.options[i].text===val){sel.selectedIndex=i;break}}
+}
+});
+})();
+</script>

@@ -42,7 +42,8 @@ View All Products
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+(function(){
+function initTabs(){
 document.querySelectorAll('[data-tab-trigger]').forEach(function(tab) {
 tab.addEventListener('click', function() {
 var sectionEl = this.closest('.tabbed-collections');
@@ -54,7 +55,10 @@ var panel = sectionEl.querySelector('[data-tab-panel="' + tabId + '"]');
 if (panel) panel.classList.add('active');
 });
 });
-});
+}
+initTabs();
+document.addEventListener('shopify:section:load', initTabs);
+})();
 </script>
 
 {% schema %}

@@ -4,11 +4,17 @@
 {% if product.featured_image != blank %}
 <img 
 class="product-card__image" 
-src="{{ product.featured_image | image_url: width: 600 }}" 
+src="{{ product.featured_image | image_url: width: 400 }}"
+srcset="{{ product.featured_image | image_url: width: 200 }} 200w,
+{{ product.featured_image | image_url: width: 300 }} 300w,
+{{ product.featured_image | image_url: width: 400 }} 400w,
+{{ product.featured_image | image_url: width: 600 }} 600w"
+sizes="(max-width: 480px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
 alt="{{ product.featured_image.alt | escape }}"
 loading="lazy"
-width="600"
-height="800"
+decoding="async"
+width="400"
+height="533"
 >
 {% else %}
 {{ 'product-1' | placeholder_svg_tag: 'product-card__image placeholder-svg' }}
@@ -17,11 +23,17 @@ height="800"
 {% if product.images.size > 1 %}
 <img 
 class="product-card__image product-card__image--hover" 
-src="{{ product.images[1] | image_url: width: 600 }}" 
+src="{{ product.images[1] | image_url: width: 400 }}"
+srcset="{{ product.images[1] | image_url: width: 200 }} 200w,
+{{ product.images[1] | image_url: width: 300 }} 300w,
+{{ product.images[1] | image_url: width: 400 }} 400w,
+{{ product.images[1] | image_url: width: 600 }} 600w"
+sizes="(max-width: 480px) 45vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
 alt="{{ product.images[1].alt | escape }}"
 loading="lazy"
-width="600"
-height="800"
+decoding="async"
+width="400"
+height="533"
 >
 {% endif %}
 </a>
@@ -36,7 +48,14 @@ height="800"
 <span class="product-card__badge product-card__badge--new">New</span>
 {% endif %}
 
-<button class="product-card__wishlist" aria-label="Add to wishlist">
+<button class="product-card__wishlist" aria-label="Add to wishlist" 
+data-wishlist-toggle
+data-product-handle="{{ product.handle }}"
+data-product-title="{{ product.title | escape }}"
+data-product-url="{{ product.url }}"
+data-product-price="{{ product.price | money }}"
+data-product-image="{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 200 }}{% endif %}"
+>
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
 </svg>
@@ -96,7 +115,7 @@ height="800"
 <span 
 class="product-card__swatch {% if forloop.first %}active{% endif %}" 
 style="background-color: {{ value | handleize }};"
-title="{{ value }}"
+title="{{ value | escape }}"
 ></span>
 {% endfor %}
 </div>

@@ -4,7 +4,20 @@
 <div class="product-gallery" data-animate="fade-right">
 <div class="product-gallery__main">
 {% if product.featured_image != blank %}
-<img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1200" height="1600" loading="eager">
+<img 
+src="{{ product.featured_image | image_url: width: 800 }}"
+srcset="{{ product.featured_image | image_url: width: 400 }} 400w,
+{{ product.featured_image | image_url: width: 600 }} 600w,
+{{ product.featured_image | image_url: width: 800 }} 800w,
+{{ product.featured_image | image_url: width: 1200 }} 1200w"
+sizes="(max-width: 412px) 100vw, (max-width: 768px) 100vw, 50vw"
+alt="{{ product.featured_image.alt | escape }}" 
+width="1200" 
+height="{{ 1200 | divided_by: product.featured_image.aspect_ratio | round }}"
+loading="eager"
+fetchpriority="high"
+decoding="async"
+>
 {% else %}
 {{ 'product-1' | placeholder_svg_tag }}
 {% endif %}

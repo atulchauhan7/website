@@ -2,9 +2,15 @@
 <div class="image-text__media" data-animate="fade-in">
 {% if section.settings.image != blank %}
 <img 
-src="{{ section.settings.image | image_url: width: 1200 }}" 
-alt="{{ section.settings.heading }}"
+src="{{ section.settings.image | image_url: width: 800 }}"
+srcset="{{ section.settings.image | image_url: width: 400 }} 400w,
+{{ section.settings.image | image_url: width: 600 }} 600w,
+{{ section.settings.image | image_url: width: 800 }} 800w,
+{{ section.settings.image | image_url: width: 1200 }} 1200w"
+sizes="(max-width: 768px) 100vw, 50vw"
+alt="{{ section.settings.heading | escape }}"
 loading="lazy"
+decoding="async"
 width="1200"
 height="{{ 1200 | divided_by: section.settings.image.aspect_ratio | round }}"
 >

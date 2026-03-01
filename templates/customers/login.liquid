@@ -4,7 +4,7 @@
 <h1>Login</h1>
 </div>
 
-<div data-animate="fade-up" data-animate-delay="200">
+<div id="customer-login" data-animate="fade-up" data-animate-delay="200">
 {% form 'customer_login' %}
 {% if form.errors %}
 <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
@@ -23,7 +23,7 @@
 </div>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-<a href="#recover" style="font-size: 0.85rem; color: var(--color-accent);">Forgot your password?</a>
+<a href="#recover" id="recover-link" style="font-size: 0.85rem; color: var(--color-accent);">Forgot your password?</a>
 </div>
 
 <button type="submit" class="btn btn--primary btn--full">Sign In</button>
@@ -33,5 +33,47 @@ Don't have an account? <a href="{{ routes.account_register_url }}" style="color:
 </p>
 {% endform %}
 </div>
+
+<div id="recover-password" style="display:none" data-animate="fade-up">
+{% form 'recover_customer_password' %}
+{% if form.errors %}
+<div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+{{ form.errors | default_errors }}
+</div>
+{% endif %}
+{% if form.posted_successfully? %}
+<div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+We've sent you an email with a link to update your password.
+</div>
+{% endif %}
+
+<p style="margin-bottom: 1.5rem; color: var(--color-text-muted); font-size: 0.9rem;">Enter your email address and we'll send you a link to reset your password.</p>
+
+<div class="form-group">
+<label class="form-label" for="recover-email">Email</label>
+<input class="form-input" type="email" id="recover-email" name="email" required autocomplete="email">
+</div>
+
+<button type="submit" class="btn btn--primary btn--full">Reset Password</button>
+
+<p style="text-align: center; margin-top: 1.5rem;">
+<a href="#login" id="cancel-recover" style="font-size: 0.9rem; color: var(--color-accent);">&larr; Back to Login</a>
+</p>
+{% endform %}
+</div>
+
+<script>
+(function(){
+var loginForm = document.getElementById('customer-login');
+var recoverForm = document.getElementById('recover-password');
+var recoverLink = document.getElementById('recover-link');
+var cancelRecover = document.getElementById('cancel-recover');
+function showRecover(e){if(e)e.preventDefault();loginForm.style.display='none';recoverForm.style.display='block'}
+function showLogin(e){if(e)e.preventDefault();recoverForm.style.display='none';loginForm.style.display='block'}
+if(recoverLink)recoverLink.addEventListener('click',showRecover);
+if(cancelRecover)cancelRecover.addEventListener('click',showLogin);
+if(window.location.hash==='#recover')showRecover();
+})();
+</script>
 </div>
 </div>

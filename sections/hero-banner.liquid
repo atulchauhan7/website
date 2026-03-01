@@ -5,14 +5,22 @@
 <div class="hero-slide {% if forloop.first %}hero-slide--active{% endif %}" {{ block.shopify_attributes }}>
 <div class="hero-slide__media">
 {% if block.settings.video != blank %}
-<video autoplay muted loop playsinline data-autoplay-scroll>
+<video autoplay muted loop playsinline data-autoplay-scroll preload="metadata">
 <source src="{{ block.settings.video }}" type="video/mp4">
 </video>
 {% elsif block.settings.image != blank %}
 <img
-src="{{ block.settings.image | image_url: width: 2000 }}"
-alt="{{ block.settings.image.alt | escape | default: section.settings.heading }}"
+src="{{ block.settings.image | image_url: width: 1200 }}"
+srcset="{{ block.settings.image | image_url: width: 600 }} 600w,
+{{ block.settings.image | image_url: width: 900 }} 900w,
+{{ block.settings.image | image_url: width: 1200 }} 1200w,
+{{ block.settings.image | image_url: width: 1800 }} 1800w,
+{{ block.settings.image | image_url: width: 2000 }} 2000w"
+sizes="100vw"
+alt="{{ block.settings.image.alt | default: section.settings.heading | escape }}"
 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+{% if forloop.first %}fetchpriority="high"{% endif %}
+decoding="{% if forloop.first %}sync{% else %}async{% endif %}"
 width="2000"
 height="1000"
 >
@@ -48,9 +56,17 @@ height="1000"
 <div class="hero-slide__media">
 {% if section.settings.image != blank %}
 <img
-src="{{ section.settings.image | image_url: width: 2000 }}"
-alt="{{ section.settings.image.alt | escape | default: section.settings.heading }}"
+src="{{ section.settings.image | image_url: width: 1200 }}"
+srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+{{ section.settings.image | image_url: width: 900 }} 900w,
+{{ section.settings.image | image_url: width: 1200 }} 1200w,
+{{ section.settings.image | image_url: width: 1800 }} 1800w,
+{{ section.settings.image | image_url: width: 2000 }} 2000w"
+sizes="100vw"
+alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
 loading="eager"
+fetchpriority="high"
+decoding="sync"
 width="2000"
 height="1000"
 >
