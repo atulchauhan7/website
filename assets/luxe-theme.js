@@ -805,7 +805,7 @@ initScrollAnimations();initSmoothReveal();initParallax();initMagneticButtons();i
 var idle=window.requestIdleCallback||function(fn){setTimeout(fn,200)};
 idle(function(){
 initSectionReveals();initAddressToggle();initCollectionSort();initFooterToggle();
-setTimeout(function(){if(!$('.cart-drawer.open,.search-overlay.open,.newsletter-popup-overlay.open,.site-header__nav.open'))document.body.classList.remove('overflow-hidden')},3000);
+setTimeout(function(){var hasOpen=document.querySelector('.cart-drawer.open')||document.querySelector('.search-overlay.open')||document.querySelector('.newsletter-popup-overlay.open')||document.querySelector('.site-header__nav.open');if(!hasOpen)document.body.classList.remove('overflow-hidden')},800);
 });
 });
 })();

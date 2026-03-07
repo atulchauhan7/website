@@ -147,11 +147,12 @@ window.addEventListener('load', function(){
   var lo = document.getElementById('page-loader');
   if(lo){ requestAnimationFrame(function(){ lo.classList.add('loaded'); }); }
 });
-/* Fallback: always hide loader after 4s even if load event hasn't fired */
+/* Fallback: always hide loader after 1.5s even if load event hasn't fired */
 setTimeout(function(){
   var lo = document.getElementById('page-loader');
   if(lo && !lo.classList.contains('loaded')){ lo.classList.add('loaded'); }
-}, 4000);
+  document.body.classList.remove('overflow-hidden');
+}, 1500);
 </script>
 
 <!-- Preload main JS -->
