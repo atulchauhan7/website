@@ -296,10 +296,10 @@ p{margin-bottom:1rem}
 /* === TABBED COLLECTIONS === */
 .tabbed-collections__header{text-align:center;margin-bottom:1.5rem}
 .tabbed-collections__tabs{display:flex;justify-content:center;gap:0.5rem;margin-top:1.25rem;flex-wrap:wrap}
-.tabbed-collections__tab{padding:11px 30px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;border:1.5px solid var(--color-border);background:transparent;color:var(--color-text-muted);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);cursor:pointer;position:relative;overflow:hidden}
-.tabbed-collections__tab::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:0;background:var(--color-accent);transition:height 0.3s cubic-bezier(0.16,1,0.3,1);z-index:0}
+.tabbed-collections__tab{padding:11px 30px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;border:1.5px solid var(--color-border);background:transparent;color:var(--color-text-muted);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);cursor:pointer;position:relative;overflow:hidden;isolation:isolate}
+.tabbed-collections__tab::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:0;background:var(--color-accent);transition:height 0.3s cubic-bezier(0.16,1,0.3,1);z-index:-1}
 .tabbed-collections__tab.active::before,.tabbed-collections__tab:hover::before{height:100%}
-.tabbed-collections__tab.active,.tabbed-collections__tab:hover{color:#fff;border-color:var(--color-accent);position:relative;z-index:1}
+.tabbed-collections__tab.active,.tabbed-collections__tab:hover{color:#fff;border-color:var(--color-accent)}
 .tabbed-collections__panel{display:none}
 .tabbed-collections__panel.active{display:block;animation:tabFadeIn 0.5s ease}
 
