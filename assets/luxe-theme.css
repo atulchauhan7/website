@@ -628,7 +628,7 @@ p{margin-bottom:1rem}
 .product-page__grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:2rem;align-items:start;max-width:100%;overflow:visible}
 /* Product Gallery Slider */
 .product-gallery--slider{position:sticky;top:140px;max-width:100%;overflow:hidden}
-.product-gallery__viewport{position:relative;width:100%;overflow:hidden;touch-action:pan-y pinch-zoom;aspect-ratio:3/4;background:var(--color-surface)}
+.product-gallery__viewport{position:relative;width:100%;overflow:hidden;touch-action:pan-y pinch-zoom;aspect-ratio:3/4;max-height:calc(100vh - 190px);background:var(--color-surface)}
 .product-gallery__track{display:flex;height:100%;will-change:transform;transition:transform 0.45s cubic-bezier(.25,.46,.45,.94)}
 .product-gallery__slide{flex:0 0 100%;width:100%;height:100%;position:relative;overflow:hidden}
 .product-gallery__slide img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.8s var(--ease-out-expo)}
@@ -697,8 +697,8 @@ p{margin-bottom:1rem}
   .product-page__grid{grid-template-columns:1fr;gap:1rem}
   .product-page{padding-top:0;overflow-x:hidden}
   .product-gallery--slider{position:static}
-  .product-gallery__viewport{aspect-ratio:3/4}
-  .product-gallery__dots{gap:2px;padding:8px 0 0}
+  .product-gallery__viewport{aspect-ratio:auto;height:calc(100vh - 130px);height:calc(100dvh - 130px);max-height:none}
+  .product-gallery__dots{gap:2px;padding:6px 0 0}
   .product-gallery__dot{height:2.5px}
   .product-gallery{position:static;max-width:100%;overflow:hidden}
   .product-gallery__main{aspect-ratio:3/4;margin-bottom:0.5rem;max-width:100%}
@@ -913,7 +913,7 @@ p{margin-bottom:1rem}
   .form-actions{flex-direction:column}
   .order-totals{text-align:left}
   /* Global mobile spacing */
-  .main-content{padding-top:100px}
+  .main-content{padding-top:80px}
   .template-index .main-content{padding-top:0}
   .section{padding:0.4rem 0}
   .section--no-padding{padding:0}
@@ -1033,6 +1033,10 @@ p{margin-bottom:1rem}
   .page-404__code{font-size:3rem}
   .pagination{gap:0.2rem}
   .pagination__link{width:34px;height:34px;font-size:0.7rem}
+  /* PDP gallery for small phones */
+  .product-gallery__viewport{height:calc(100vh - 120px);height:calc(100dvh - 120px)}
+  .product-gallery__dots{padding:4px 0 0}
+  .product-breadcrumbs{padding:0.4rem 0;font-size:0.65rem}
 }
 
 /* === VERY SMALL SCREENS (360px and below) === */
@@ -1042,8 +1046,11 @@ p{margin-bottom:1rem}
 
 /* === TABLET (769px to 1024px) === */
 @media(min-width:769px) and (max-width:1024px){
+  .main-content{padding-top:100px}
+  .template-index .main-content{padding-top:0}
   .product-page__grid{grid-template-columns:1fr 1fr;gap:1.5rem}
-  .product-gallery--vertical{position:static}
+  .product-gallery--slider{position:static}
+  .product-gallery__viewport{aspect-ratio:3/4;max-height:calc(100vh - 150px)}
   .product-info{position:static}
   .product-gallery__main{aspect-ratio:3/4}
   .product-gallery__thumb{width:60px;min-width:60px;height:78px}
@@ -1117,7 +1124,7 @@ p{margin-bottom:1rem}
   .cart-drawer__note{font-size:0.68rem}
   /* Global small phone polish */
   .container{padding:0 10px}
-  .main-content{padding-top:90px}
+  .main-content{padding-top:70px}
   .template-index .main-content{padding-top:0}
   .section{padding:0.75rem 0}
   .section--no-padding{padding:0}
@@ -1134,11 +1141,11 @@ p{margin-bottom:1rem}
 }
 
 /* === WHATSAPP FLOATING BUTTON === */
-.whatsapp-float{position:fixed;bottom:30px;left:30px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:all 0.4s var(--ease-out-expo);animation:whatsappPulse 3s ease-in-out infinite}
+.whatsapp-float{position:fixed;bottom:90px;left:30px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:all 0.4s var(--ease-out-expo);animation:whatsappPulse 3s ease-in-out infinite}
 .whatsapp-float:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 30px rgba(37,211,102,0.45)}
 @keyframes whatsappPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35)}50%{box-shadow:0 4px 20px rgba(37,211,102,0.55),0 0 0 8px rgba(37,211,102,0.1)}}
 @media(max-width:768px){
-  .whatsapp-float{bottom:max(20px,calc(12px + env(safe-area-inset-bottom,0px)));left:16px;width:50px;height:50px}
+  .whatsapp-float{bottom:max(80px,calc(72px + env(safe-area-inset-bottom,0px)));left:16px;width:50px;height:50px}
   .whatsapp-float svg{width:22px;height:22px}
 }
 
