@@ -400,7 +400,7 @@ p{margin-bottom:1rem}
 @keyframes scrolltext{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* === FOOTER === */
-.site-footer{background:#111;color:rgba(255,255,255,0.65);padding-top:2.5rem}
+.site-footer{background:#111;color:rgba(255,255,255,0.65);padding:clamp(2rem, 4vw, 3.5rem) 0 0}
 .site-footer__grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid rgba(255,255,255,0.1)}
 .site-footer__brand-col{display:block}
 .site-footer__brand{font-family:var(--font-heading);font-size:1.4rem;font-weight:700;color:#fff;display:inline-block;margin-bottom:1rem}
@@ -412,7 +412,7 @@ p{margin-bottom:1rem}
 .site-footer__toggle{display:none;color:rgba(255,255,255,0.4);padding:4px;background:none;border:none}
 .site-footer__link{display:block;padding:5px 0;font-size:0.85rem;transition:color 0.3s}
 .site-footer__link:hover{color:#fff}
-.site-footer__bottom{padding:1rem 0;display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;flex-wrap:wrap;gap:0.6rem}
+.site-footer__bottom{padding:1.25rem 0;display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;flex-wrap:wrap;gap:0.6rem;margin-top:0.25rem}
 .site-footer__social{display:flex;gap:0.75rem}
 .site-footer__social-link{width:36px;height:36px;border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:rgba(255,255,255,0.6)}
 .site-footer__social-link:hover{background:var(--color-accent);border-color:var(--color-accent);color:#fff}
@@ -424,7 +424,7 @@ p{margin-bottom:1rem}
   .site-footer__links{display:none;padding-top:0.5rem}
   .site-footer__menu-col.open .site-footer__links{display:block}
   .site-footer__menu-col.open .site-footer__toggle svg{transform:rotate(45deg)}
-  .site-footer__bottom{flex-direction:column;text-align:center}
+  .site-footer__bottom{flex-direction:column;text-align:center;padding:1.25rem 0 1.5rem}
 }
 
 /* === CART DRAWER === */

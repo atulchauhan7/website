@@ -35,7 +35,9 @@
 <div class="cart-summary__inner">
 <div class="cart-summary__total"><strong>Subtotal:</strong> {{ cart.total_price | money }}</div>
 <p class="cart-summary__note">Shipping &amp; taxes calculated at checkout</p>
-<a href="{{ routes.checkout_url }}" class="btn btn--primary btn--large">Proceed to Checkout</a>
+<form action="{{ routes.cart_url }}" method="post">
+<button type="submit" name="checkout" class="btn btn--primary btn--large">Proceed to Checkout</button>
+</form>
 <div class="payment-icons">
 <span class="payment-icons__label">We accept</span>
 <div class="payment-icons__list">
