@@ -387,14 +387,22 @@ $$('[data-hero-slideshow]').forEach(h=>{
 const slides=h.querySelectorAll('.hero-slide');
 if(slides.length<=1)return;
 let cur=0;const speed=parseInt(h.dataset.heroSpeed)||6000;let timer=null;
+const progressBar=h.querySelector('[data-hero-progress]');
+function resetProgress(){
+if(!progressBar)return;
+progressBar.style.animation='none';
+progressBar.offsetHeight;/* reflow */
+progressBar.style.animation='heroProgress '+speed+'ms linear forwards';
+}
 function goTo(i){
 if(i<0)i=slides.length-1;if(i>=slides.length)i=0;
 cur=i;slides.forEach((s,idx)=>s.classList.toggle('hero-slide--active',idx===cur));
 h.querySelectorAll('.hero-slider__dot').forEach((d,idx)=>d.classList.toggle('active',idx===cur));
+resetProgress();
 }
 function next(){goTo(cur+1)}
 function prev(){goTo(cur-1)}
-function startAP(){stopAP();timer=setInterval(next,speed)}
+function startAP(){stopAP();timer=setInterval(next,speed);resetProgress()}
 function stopAP(){if(timer){clearInterval(timer);timer=null}}
 /* Dots */
 h.querySelectorAll('.hero-slider__dot').forEach(d=>{d.addEventListener('click',function(){goTo(parseInt(this.getAttribute('data-slide-index')));stopAP();startAP()})});
@@ -462,6 +470,13 @@ initFooterToggle();
 
 /* === PRODUCT GALLERY === */
 function initProductGallery(){
+/* Vertical gallery — zoom on hover */
+$$('.product-gallery--vertical .product-gallery__item').forEach(item=>{
+const img=item.querySelector('img');if(!img)return;
+item.addEventListener('mousemove',function(e){if(window.innerWidth<769)return;const r=item.getBoundingClientRect();img.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';img.style.transform='scale(1.6)'});
+item.addEventListener('mouseleave',()=>{img.style.transform='scale(1)'});
+});
+/* Legacy thumb gallery */
 const mi=$('.product-gallery__main img'),ths=$$('.product-gallery__thumb');
 if(!mi||!ths.length)return;
 ths.forEach(th=>{th.addEventListener('click',function(){const ns=this.dataset.fullImage||this.querySelector('img').src;mi.style.opacity='0';mi.style.transform='scale(0.95)';setTimeout(()=>{mi.src=ns;mi.removeAttribute('srcset');mi.style.opacity='1';mi.style.transform='scale(1)'},300);ths.forEach(t=>t.classList.remove('active'));this.classList.add('active')})});

@@ -10,14 +10,6 @@
 <p class="section-header__description">{{ section.settings.description }}</p>
 {% endif %}
 </div>
-<div class="carousel__nav">
-<button class="carousel__btn carousel__btn--prev" data-carousel-prev aria-label="Previous">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<button class="carousel__btn carousel__btn--next" data-carousel-next aria-label="Next">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6"/></svg>
-</button>
-</div>
 </div>
 
 <div class="carousel featured-carousel"
@@ -48,7 +40,7 @@ data-animate="fade-up" data-animate-delay="200">
 </div>
 
 {% if section.settings.show_view_all %}
-<div class="text-center" style="margin-top: 2rem;" data-animate="fade-up" data-animate-delay="400">
+<div class="text-center" style="margin-top: 1rem;" data-animate="fade-up" data-animate-delay="400">
 <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="btn btn--secondary">
 View All Products
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

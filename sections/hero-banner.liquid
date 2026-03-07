@@ -95,6 +95,11 @@ height="1000"
 </div>
 </div>
 {% endif %}
+
+<div class="hero-slider__scroll-cue" aria-hidden="true">
+<span class="hero-slider__scroll-text">Scroll</span>
+<span class="hero-slider__scroll-line"></span>
+</div>
 </div>
 
 {% if section.blocks.size > 1 %}
@@ -109,6 +114,9 @@ height="1000"
 <button class="hero-slider__arrow hero-slider__arrow--next" aria-label="Next slide">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
 </button>
+<div class="hero-slider__progress">
+<div class="hero-slider__progress-bar" data-hero-progress style="animation-duration: {{ section.settings.slideshow_speed }}s;"></div>
+</div>
 {% endif %}
 </section>
 
