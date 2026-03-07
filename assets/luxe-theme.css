@@ -1096,7 +1096,7 @@ p{margin-bottom:1rem}
   .product-info__meta{margin-top:0.75rem;padding-top:0.75rem}
   .product-info__meta-item{font-size:0.72rem;margin-bottom:0.3rem}
   .product-info__meta-item strong{font-size:0.72rem}
-  .product-breadcrumbs{padding:0.5rem 0;font-size:0.65rem}
+  .product-breadcrumbs{padding:2px 0;font-size:0.65rem}
   /* Header tighter */
   .site-header__inner{padding:8px 12px}
   .site-header.scrolled .site-header__inner{padding:6px 12px}
