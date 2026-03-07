@@ -54,15 +54,15 @@ p{margin-bottom:1rem}
 .template-index .main-content{padding-top:0}
 
 /* === SECTIONS === */
-.section{padding:2.5rem 0}
+.section{padding:1.5rem 0}
 .section--no-padding{padding:0}
 .shopify-section+.shopify-section{margin-top:0}
-.section-header{text-align:center;margin-bottom:3rem}
+.section-header{text-align:center;margin-bottom:1.5rem}
 .section-header__subtitle{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.4em;color:var(--color-accent);margin-bottom:0.75rem;font-weight:500;display:inline-flex;align-items:center;gap:1.5rem}
 .section-header__subtitle::before,.section-header__subtitle::after{content:'';width:40px;height:0.5px;background:var(--color-accent);display:inline-block;opacity:0.6}
 .section-header__title{margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.06em}
 .section-header__description{max-width:520px;margin:0 auto;color:var(--color-text-muted);font-size:0.88rem;line-height:1.85;letter-spacing:0.01em}
-.section-header--with-nav{display:flex;align-items:flex-end;justify-content:space-between;text-align:left;margin-bottom:3rem}
+.section-header--with-nav{display:flex;align-items:flex-end;justify-content:space-between;text-align:left;margin-bottom:1.5rem}
 .section-header--with-nav .section-header__description{margin:0;text-align:left}
 
 /* === BUTTONS — Label Ritu Kumar inspired: clean, sharp, refined === */
@@ -82,13 +82,15 @@ p{margin-bottom:1rem}
 .btn--full{width:100%}
 .btn--magnetic{transition:transform 0.3s var(--ease-out-expo)}
 
-/* === PAGE LOADER === */
-.page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--color-background);display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.6s var(--ease-out-expo),visibility 0.6s}
+/* === PAGE LOADER — Luxury fashion brand experience === */
+.page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--color-heading);display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.8s var(--ease-out-expo),visibility 0.8s}
 .page-loader.loaded{opacity:0;visibility:hidden;pointer-events:none}
-.loader-text{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5em;color:var(--color-text-muted);font-family:var(--font-heading);font-weight:400}
-.loader-inner{text-align:center}
-.loader-circle{width:32px;height:32px;border:1.5px solid var(--color-border);border-top-color:var(--color-accent);border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 1.5rem}
-@keyframes spin{to{transform:rotate(360deg)}}
+.loader-inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:2rem}
+.loader-text{font-size:1.1rem;text-transform:uppercase;letter-spacing:0.6em;color:rgba(255,255,255,0.9);font-family:var(--font-heading);font-weight:400;position:relative}
+.loader-tagline{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.35);font-family:var(--font-body);font-weight:400;margin-top:-0.5rem}
+.loader-bar{width:120px;height:1.5px;background:rgba(255,255,255,0.1);overflow:hidden;border-radius:2px}
+.loader-bar__fill{width:100%;height:100%;background:linear-gradient(90deg,var(--color-accent),rgba(255,255,255,0.8));animation:loaderSlide 1.2s var(--ease-out-expo) infinite}
+@keyframes loaderSlide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* === ANNOUNCEMENT BAR — Warm, refined like Ritu Kumar === */
 .announcement-bar{background:var(--color-heading);color:rgba(255,255,255,0.85);padding:10px 0;font-size:0.68rem;text-align:center;letter-spacing:0.14em;font-weight:400;position:fixed;top:0;left:0;right:0;z-index:1001;overflow:hidden;transition:transform 0.4s var(--ease-out-expo);text-transform:uppercase}
@@ -219,7 +221,7 @@ p{margin-bottom:1rem}
 }
 
 /* === IMAGE BANNERS — Clean grid, editorial hover === */
-.image-banners{padding:1.5rem 0}
+.image-banners{padding:0.5rem 0}
 .image-banners__grid{display:grid;gap:3px}
 .image-banners__grid--1{grid-template-columns:1fr}
 .image-banners__grid--2{grid-template-columns:repeat(2,1fr)}
@@ -275,7 +277,7 @@ p{margin-bottom:1rem}
 .product-card__overlay-btn svg{width:15px;height:15px}
 
 /* Card info — clean, minimal like Ritu Kumar */
-.product-card__info{padding:1rem 0;text-align:left}
+.product-card__info{padding:0.5rem 0;text-align:left}
 .product-card__type{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-text-muted);margin-bottom:0.35rem}
 .product-card__vendor{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-text-muted);margin-bottom:0.35rem}
 .product-card__title{font-family:var(--font-body);font-size:0.85rem;font-weight:400;margin-bottom:0.4rem;line-height:1.45;transition:color 0.3s;color:var(--color-heading)}
@@ -301,8 +303,8 @@ p{margin-bottom:1rem}
 }
 
 /* === TABBED COLLECTIONS — Clean tabs, editorial === */
-.tabbed-collections{padding:3rem 0}
-.tabbed-collections__header{text-align:center;margin-bottom:2rem}
+.tabbed-collections{padding:1.5rem 0}
+.tabbed-collections__header{text-align:center;margin-bottom:1rem}
 .tabbed-collections__tabs{display:flex;justify-content:center;gap:0.25rem;margin-top:1.5rem;flex-wrap:wrap}
 .tabbed-collections__tab{padding:12px 32px;font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.16em;border:1px solid var(--color-border);background:transparent;color:var(--color-text-muted);transition:all 0.4s var(--ease-out-expo);cursor:pointer;position:relative;overflow:hidden;isolation:isolate}
 .tabbed-collections__tab::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:0;background:var(--color-heading);transition:height 0.4s var(--ease-out-expo);z-index:-1}
@@ -312,8 +314,8 @@ p{margin-bottom:1rem}
 .tabbed-collections__panel.active{display:block;animation:tabFadeIn 0.5s ease}
 
 /* === COLLECTION GRID (category cards) — Editorial panels === */
-.cat-panel{padding:2rem 0}
-.cat-panel__header{margin-bottom:2rem}
+.cat-panel{padding:1rem 0}
+.cat-panel__header{margin-bottom:1rem}
 .cat-panel__label{display:inline-flex;align-items:center;gap:1.25rem;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.3em;color:var(--color-accent);font-weight:500;margin-bottom:0.75rem}
 .cat-panel__label::after{content:"";width:48px;height:0.5px;background:var(--color-accent)}
 .cat-panel__heading{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;text-transform:uppercase;letter-spacing:0.05em}
@@ -367,7 +369,7 @@ p{margin-bottom:1rem}
 .collection-card__count{font-size:0.7rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.1em}
 
 /* === TESTIMONIALS — Warm, genuine === */
-.testimonial-card{background:#fff;padding:2rem;border:1px solid var(--color-border);transition:all 0.5s var(--ease-out-expo);position:relative}
+.testimonial-card{background:#fff;padding:1.5rem;border:1px solid var(--color-border);transition:all 0.5s var(--ease-out-expo);position:relative}
 .testimonial-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--color-accent);transition:height 0.6s var(--ease-out-expo)}
 .testimonial-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.05)}
 .testimonial-card:hover::before{height:100%}
@@ -383,7 +385,7 @@ p{margin-bottom:1rem}
 /* === USP SECTION — Clean, brand-forward === */
 .usp-section{background:var(--color-surface);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
 .usp-section__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0}
-.usp-card{text-align:center;padding:2.5rem 1.5rem;transition:transform 0.4s var(--ease-out-expo);border-right:1px solid var(--color-border)}
+.usp-card{text-align:center;padding:1.5rem 1rem;transition:transform 0.4s var(--ease-out-expo);border-right:1px solid var(--color-border)}
 .usp-card:last-child{border-right:none}
 .usp-card:hover{transform:translateY(-3px)}
 .usp-card__icon{width:30px;height:30px;margin:0 auto 1.25rem;color:var(--color-accent);transition:transform 0.4s var(--ease-out-expo)}
@@ -417,11 +419,11 @@ p{margin-bottom:1rem}
 .image-text__media{position:relative;overflow:hidden}
 .image-text__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out-expo)}
 .image-text:hover .image-text__media img{transform:scale(1.03)}
-.image-text__content{display:flex;flex-direction:column;justify-content:center;padding:4rem 5rem}
+.image-text__content{display:flex;flex-direction:column;justify-content:center;padding:2.5rem 3rem}
 .image-text__subtitle{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.4em;color:var(--color-accent);margin-bottom:0.75rem;font-weight:500;display:inline-flex;align-items:center;gap:1rem}
 .image-text__subtitle::before{content:'';width:30px;height:0.5px;background:var(--color-accent)}
-.image-text__heading{margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:0.04em;font-weight:400}
-.image-text__description{color:var(--color-text-muted);margin-bottom:2rem;line-height:1.9;font-size:0.9rem}
+.image-text__heading{margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.04em;font-weight:400}
+.image-text__description{color:var(--color-text-muted);margin-bottom:1.25rem;line-height:1.9;font-size:0.9rem}
 .image-text__description p{margin-bottom:0}
 @media(max-width:768px){
   .image-text{grid-template-columns:1fr;min-height:auto}
@@ -430,15 +432,15 @@ p{margin-bottom:1rem}
 }
 
 /* === NEWSLETTER — Warm, editorial like Ritu Kumar === */
-.newsletter{background:var(--color-surface);text-align:center;padding:4rem 0}
-.newsletter__form{max-width:500px;margin:1.5rem auto 0;display:flex;gap:0;border:1px solid var(--color-border);overflow:hidden;transition:border-color 0.5s var(--ease-out-expo),box-shadow 0.5s}
+.newsletter{background:var(--color-surface);text-align:center;padding:2rem 0}
+.newsletter__form{max-width:500px;margin:1rem auto 0;display:flex;gap:0;border:1px solid var(--color-border);overflow:hidden;transition:border-color 0.5s var(--ease-out-expo),box-shadow 0.5s}
 .newsletter__form:focus-within{border-color:var(--color-heading);box-shadow:0 4px 24px rgba(0,0,0,0.04)}
 .newsletter__input{flex:1;border:none;padding:16px 22px;font-size:0.85rem;background:#fff;outline:none;letter-spacing:0.01em}
 .newsletter__submit{background:var(--color-heading);color:#fff;padding:16px 32px;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.16em;font-weight:500;transition:background 0.4s var(--ease-out-expo);white-space:nowrap;position:relative;overflow:hidden;border:none;cursor:pointer}
 .newsletter__submit:hover{background:var(--color-accent)}
 
 /* === SCROLLING TEXT — Editorial marquee === */
-.scrolling-text{overflow:hidden;white-space:nowrap;padding:2rem 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+.scrolling-text{overflow:hidden;white-space:nowrap;padding:1rem 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
 .scrolling-text__inner{display:inline-flex;animation:scrolltext 30s linear infinite}
 .scrolling-text__item{font-family:var(--font-heading);font-size:clamp(2rem,4.5vw,4rem);font-weight:400;padding:0 2.5rem;color:transparent;-webkit-text-stroke:1px var(--color-heading);transition:all 0.5s var(--ease-out-expo);text-transform:uppercase;letter-spacing:0.04em}
 .scrolling-text__item:hover{color:var(--color-heading);-webkit-text-stroke:0}
@@ -447,8 +449,8 @@ p{margin-bottom:1rem}
 @keyframes tabFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* === FOOTER — Dark, warm, Ritu Kumar inspired === */
-.site-footer{background:#0a0a0a;color:rgba(255,255,255,0.55);padding:clamp(3rem, 5vw, 4rem) 0 0;position:relative;z-index:1}
-.site-footer__grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.site-footer{background:#0a0a0a;color:rgba(255,255,255,0.55);padding:clamp(2rem, 4vw, 3rem) 0 0;position:relative;z-index:1}
+.site-footer__grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.06)}
 .site-footer__brand-col{display:block}
 .site-footer__brand{font-family:var(--font-heading);font-size:1.2rem;font-weight:400;color:#fff;display:inline-block;margin-bottom:1.5rem;letter-spacing:0.35em;text-transform:uppercase}
 .site-footer__about{font-size:0.82rem;line-height:1.9;margin-bottom:1.25rem}
@@ -604,7 +606,12 @@ p{margin-bottom:1rem}
 .quantity-selector button:hover{background:var(--color-surface)}
 .quantity-selector button:focus:not(:focus-visible){outline:none;background:transparent}
 .quantity-selector input{width:50px;text-align:center;border:none;border-left:1px solid var(--color-border);border-right:1px solid var(--color-border);height:44px;font-weight:500;outline:none;font-size:0.85rem}
-.product-info__add-to-cart{margin-bottom:1.25rem}
+/* Buy Now + Add to Cart dual CTA */
+.product-info__cta-group{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem}
+.product-info__add-to-cart{margin-bottom:0}
+.btn--buy-now{background:var(--color-accent);color:#fff;border:none}
+.btn--buy-now:hover{background:var(--color-heading);color:#fff;transform:translateY(-1px);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
+.btn--buy-now svg{width:16px;height:16px}
 .product-info__meta{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--color-border)}
 .product-info__meta-item{display:flex;gap:0.5rem;font-size:0.78rem;margin-bottom:0.4rem;color:var(--color-text-muted);letter-spacing:0.01em}
 .product-info__meta-item strong{color:var(--color-heading);font-weight:500}
@@ -668,7 +675,7 @@ p{margin-bottom:1rem}
 .blog-card__image{aspect-ratio:3/2;overflow:hidden}
 .blog-card__image img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s var(--ease-out-expo)}
 .blog-card:hover .blog-card__image img{transform:scale(1.04)}
-.blog-card__content{padding:1.25rem 0}
+.blog-card__content{padding:0.75rem 0}
 .blog-card__date{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--color-text-muted);margin-bottom:0.5rem;font-weight:500}
 .blog-card__title{font-size:1.05rem;margin-bottom:0.5rem;transition:color 0.3s;font-weight:400;letter-spacing:0.01em}
 .blog-card:hover .blog-card__title{color:var(--color-accent)}
@@ -748,6 +755,22 @@ p{margin-bottom:1rem}
 .cart-head{display:flex;border-bottom:2px solid var(--color-border);padding-bottom:0.75rem;margin-bottom:0}
 .cart-head span{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
 
+/* === CART CELEBRATION — Confetti burst on open === */
+.cart-celebration{position:fixed;top:0;right:0;width:480px;max-width:95vw;height:100dvh;pointer-events:none;z-index:2002;overflow:hidden}
+.confetti-piece{position:absolute;width:8px;height:8px;opacity:0;animation:confettiFall 1.8s ease-out forwards}
+.confetti-piece:nth-child(odd){border-radius:50%}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg) scale(1)}60%{opacity:1}100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(0.3)}}
+
+/* === QUANTITY SPINNER (loading state) === */
+.quantity-selector{position:relative}
+.quantity-selector.is-loading::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.7);z-index:2;display:flex;align-items:center;justify-content:center}
+.quantity-selector.is-loading::before{content:'';position:absolute;top:50%;left:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:1.5px solid var(--color-border);border-top-color:var(--color-accent);border-radius:50%;animation:spin 0.6s linear infinite;z-index:3}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cart-drawer__qty{position:relative}
+.cart-drawer__qty.is-loading{opacity:0.5;pointer-events:none}
+.cart-drawer__qty.is-loading::after{content:'';position:absolute;inset:-2px;background:rgba(255,255,255,0.6);z-index:2}
+.cart-drawer__qty.is-loading::before{content:'';position:absolute;top:50%;left:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border:1.5px solid var(--color-border);border-top-color:var(--color-accent);border-radius:50%;animation:spin 0.6s linear infinite;z-index:3}
+
 /* === MISC === */
 .overflow-hidden{overflow:hidden!important;height:100vh!important;height:100dvh!important}
 .address-actions{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
@@ -803,10 +826,10 @@ p{margin-bottom:1rem}
   /* Global mobile spacing */
   .main-content{padding-top:70px}
   .template-index .main-content{padding-top:0}
-  .section{padding:1.5rem 0}
+  .section{padding:1rem 0}
   .section--no-padding{padding:0}
   .container{padding:0 16px}
-  .section-header{margin-bottom:1rem}
+  .section-header{margin-bottom:0.75rem}
   .section-header__title{font-size:1.2rem}
   .section-header__description{font-size:0.85rem}
   .section-header--with-nav{flex-direction:column;align-items:flex-start;gap:0.75rem;text-align:left}
@@ -967,7 +990,7 @@ p{margin-bottom:1rem}
   .quantity-selector{min-width:110px}
   .quantity-selector button{width:36px;height:36px;font-size:1.1rem}
   .quantity-selector input{width:38px;height:36px;font-size:0.82rem}
-  .product-info__add-to-cart{position:sticky;bottom:0;z-index:10;background:var(--color-background);padding:0.6rem 0;padding-bottom:calc(0.6rem + env(safe-area-inset-bottom, 0px));margin:0 -0.15rem}
+  .product-info__cta-group{position:sticky;bottom:0;z-index:10;background:var(--color-background);padding:0.6rem 0;padding-bottom:calc(0.6rem + env(safe-area-inset-bottom, 0px));margin:0 -0.15rem;gap:0.35rem}
   .product-info__add-to-cart .btn{padding:13px;font-size:0.78rem;letter-spacing:0.08em}
   .product-accordion{margin-top:0.75rem}
   .accordion-trigger{padding:0.75rem 0;font-size:0.75rem}
@@ -997,9 +1020,9 @@ p{margin-bottom:1rem}
   .container{padding:0 10px}
   .main-content{padding-top:60px}
   .template-index .main-content{padding-top:0}
-  .section{padding:1.25rem 0}
+  .section{padding:0.75rem 0}
   .section--no-padding{padding:0}
-  .section-header{margin-bottom:0.75rem}
+  .section-header{margin-bottom:0.5rem}
   .section-header__title{font-size:1.05rem}
   .section-header__description{font-size:0.75rem}
   .btn{padding:10px 20px;font-size:0.72rem}

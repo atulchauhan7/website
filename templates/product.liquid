@@ -88,6 +88,7 @@ Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_b
 </div>
 </div>
 
+<div class="product-info__cta-group">
 <div class="product-info__add-to-cart">
 <button type="submit" class="btn btn--primary btn--full btn--large" {% unless product.available %}disabled{% endunless %}>
 {% if product.available %}
@@ -96,6 +97,13 @@ Add to Cart
 Sold Out
 {% endif %}
 </button>
+</div>
+{% if product.available %}
+<button type="button" class="btn btn--buy-now btn--full btn--large" data-buy-now>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+Buy Now
+</button>
+{% endif %}
 </div>
 {% endform %}
 
