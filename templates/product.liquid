@@ -45,9 +45,7 @@ decoding="async"
 <button class="product-gallery__dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to image {{ forloop.index }}"></button>
 {% endfor %}
 </div>
-<div class="product-gallery__counter">
-<span class="product-gallery__current">1</span> / <span class="product-gallery__total">{{ product.images.size }}</span>
-</div>
+
 {% endif %}
 </div>
 
