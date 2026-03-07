@@ -34,6 +34,8 @@ window.addEventListener('scroll',throttle(handleHeaderScroll,16),{passive:true})
 const menuToggle=$('.menu-toggle');
 const mobileNav=$('.site-header__nav');
 if(menuToggle&&mobileNav){menuToggle.addEventListener('click',function(){this.classList.toggle('active');mobileNav.classList.toggle('open');document.body.classList.toggle('overflow-hidden');this.setAttribute('aria-expanded',this.classList.contains('active'))})}
+/* Mobile: toggle mega-menu on tap instead of hover */
+if(window.innerWidth<=1024){$$('.nav-item').forEach(function(ni){var link=ni.querySelector('.site-header__nav-link');var mega=ni.querySelector('.mega-menu');if(link&&mega){link.addEventListener('click',function(e){if(mega){e.preventDefault();mega.classList.toggle('open')}})}})}
 
 /* === CART DRAWER === */
 const cartDrawer=$('.cart-drawer');
@@ -112,7 +114,14 @@ h+='</div></div>';
 h+='</div>';
 h+='<div class="cart-drawer__footer"><div class="cart-drawer__subtotal"><span>Subtotal</span>';
 h+='<span class="cart-drawer__subtotal-price">'+money(cart.total_price)+'</span></div>';
-h+='<a href="/checkout" class="btn btn--primary btn--full">Checkout</a>';
+h+='<a href="'+(window.theme&&window.theme.routes&&window.theme.routes.checkout_url?window.theme.routes.checkout_url:'/checkout')+'" class="btn btn--primary btn--full">Checkout</a>';
+h+='<div class="payment-icons payment-icons--drawer"><div class="payment-icons__list">';
+h+='<span class="payment-icon" title="Visa"><svg viewBox="0 0 38 24" width="38" height="24"><rect width="38" height="24" rx="3" fill="#1A1F71"/><path d="M15.6 16.4l1.7-10.3h2.7l-1.7 10.3h-2.7zm11.3-10c-.5-.2-1.4-.4-2.4-.4-2.7 0-4.6 1.4-4.6 3.4 0 1.5 1.4 2.3 2.4 2.8 1 .5 1.4.8 1.4 1.3 0 .7-.8 1-1.6 1-1.1 0-1.6-.2-2.5-.5l-.3-.2-.4 2.1c.6.3 1.8.5 3 .5 2.9 0 4.7-1.4 4.7-3.5 0-1.2-.7-2.1-2.3-2.8-.9-.5-1.5-.8-1.5-1.3 0-.4.5-.9 1.5-.9.9 0 1.5.2 2 .4l.2.1.4-2zm7 0h-2.1c-.7 0-1.2.2-1.4.8l-4.1 9.6h2.9l.6-1.6h3.5l.3 1.6h2.5l-2.2-10.3zm-3.4 6.6l1.5-3.9.4 3.9h-1.9zM14.2 6.1l-2.6 7-.3-1.4c-.5-1.6-2-3.4-3.7-4.3l2.5 9h2.9l4.3-10.3h-3.1z" fill="#fff"/><path d="M8.4 6.1H4.2l-.1.3c3.4.9 5.7 2.9 6.6 5.4l-1-4.9c-.2-.6-.6-.8-1.3-.8z" fill="#F9A533"/></svg></span>';
+h+='<span class="payment-icon" title="Mastercard"><svg viewBox="0 0 38 24" width="38" height="24"><rect width="38" height="24" rx="3" fill="#252525"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/><path d="M19 7.3a7 7 0 0 1 2.6 4.7A7 7 0 0 1 19 16.7a7 7 0 0 1-2.6-4.7A7 7 0 0 1 19 7.3z" fill="#FF5F00"/></svg></span>';
+h+='<span class="payment-icon" title="PayPal"><svg viewBox="0 0 38 24" width="38" height="24"><rect width="38" height="24" rx="3" fill="#fff" stroke="#e8e8e8"/><path d="M25.2 7.8c-.4 2.6-2.4 2.6-4.3 2.6h-1.1l.8-4.8h.6c1.3 0 2.5 0 3.2.4.4.3.6.7.8 1.8z" fill="#003087"/><path d="M13.5 7.8c-.4 2.6-2.4 2.6-4.3 2.6H8.1l.8-4.8h.6c1.3 0 2.5 0 3.2.4.4.3.6.7.8 1.8z" fill="#002F86"/></svg></span>';
+h+='<span class="payment-icon" title="Apple Pay"><svg viewBox="0 0 38 24" width="38" height="24"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="15" text-anchor="middle" fill="#fff" font-size="8" font-family="sans-serif" font-weight="600">Pay</text></svg></span>';
+h+='<span class="payment-icon" title="Shop Pay"><svg viewBox="0 0 38 24" width="38" height="24"><rect width="38" height="24" rx="3" fill="#5A31F4"/><text x="19" y="15" text-anchor="middle" fill="#fff" font-size="8" font-family="sans-serif" font-weight="600">Shop</text></svg></span>';
+h+='</div></div>';
 h+='<p class="cart-drawer__note">Shipping &amp; taxes calculated at checkout</p></div>';
 }else{
 h+='<div class="cart-drawer__empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
@@ -453,7 +462,7 @@ initFooterToggle();
 function initProductGallery(){
 const mi=$('.product-gallery__main img'),ths=$$('.product-gallery__thumb');
 if(!mi||!ths.length)return;
-ths.forEach(th=>{th.addEventListener('click',function(){const ns=this.dataset.fullImage||this.querySelector('img').src;mi.style.opacity='0';mi.style.transform='scale(0.95)';setTimeout(()=>{mi.src=ns;mi.style.opacity='1';mi.style.transform='scale(1)'},300);ths.forEach(t=>t.classList.remove('active'));this.classList.add('active')})});
+ths.forEach(th=>{th.addEventListener('click',function(){const ns=this.dataset.fullImage||this.querySelector('img').src;mi.style.opacity='0';mi.style.transform='scale(0.95)';setTimeout(()=>{mi.src=ns;mi.removeAttribute('srcset');mi.style.opacity='1';mi.style.transform='scale(1)'},300);ths.forEach(t=>t.classList.remove('active'));this.classList.add('active')})});
 if(mi){const ct=mi.parentElement;ct.addEventListener('mousemove',function(e){if(window.innerWidth<769)return;const r=ct.getBoundingClientRect();mi.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';mi.style.transform='scale(1.5)'});ct.addEventListener('mouseleave',()=>{mi.style.transform='scale(1)'})}
 }
 initProductGallery();
@@ -616,7 +625,8 @@ initVideoAutoplay();
 $$('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const id=this.getAttribute('href');if(id==='#')return;const t=$(id);if(t){e.preventDefault();const off=header?header.offsetHeight:0;window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-off,behavior:'smooth'})}})});
 
 /* === UTILITY INITS === */
-function initAddressToggle(){$$('[data-toggle-address]').forEach(function(b){b.addEventListener('click',function(){var id=this.getAttribute('data-toggle-address');var el=document.getElementById(id);if(el)el.style.display=el.style.display==='none'?'block':'none'})})}
+function initAddressToggle(){$$('[data-toggle-address]').forEach(function(b){b.addEventListener('click',function(){var id=this.getAttribute('data-toggle-address');var el=document.getElementById(id);if(el)el.style.display=el.style.display==='none'?'block':'none'})});
+$$('[data-delete-address]').forEach(function(b){b.addEventListener('click',function(){if(!confirm('Are you sure you want to delete this address?'))return;var url=this.getAttribute('data-delete-url');if(url)Shopify.postLink(url,{parameters:{_method:'delete'}})})})}
 function initCollectionSort(){var sel=$('[data-sort-collection]');if(sel)sel.addEventListener('change',function(){window.location.href=this.value})}
 
 /* === SHOPIFY SECTION EVENTS === */

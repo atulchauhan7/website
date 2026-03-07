@@ -9,13 +9,13 @@
 
 {% form 'contact' %}
 {% if form.posted_successfully? %}
-<div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--success">
 Thank you for your message! We'll get back to you soon.
 </div>
 {% endif %}
 
 {% if form.errors %}
-<div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--error">
 {{ form.errors | default_errors }}
 </div>
 {% endif %}

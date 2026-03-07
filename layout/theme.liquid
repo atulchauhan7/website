@@ -86,11 +86,7 @@ h1{font-size:clamp(2rem,4vw,3.5rem)}
 "name": {{ shop.name | json }},
 "url": {{ request.origin | json }},
 {% if settings.favicon != blank %}"logo": {{ settings.favicon | image_url: width: 512 | prepend: 'https:' | json }},{% endif %}
-"sameAs": [
-{% if settings.social_facebook != blank %}{{ settings.social_facebook | json }},{% endif %}
-{% if settings.social_instagram != blank %}{{ settings.social_instagram | json }},{% endif %}
-{% if settings.social_twitter != blank %}{{ settings.social_twitter | json }}{% endif %}
-]
+"sameAs": [{% assign first_social = true %}{% if settings.social_facebook != blank %}{% unless first_social %},{% endunless %}{{ settings.social_facebook | json }}{% assign first_social = false %}{% endif %}{% if settings.social_instagram != blank %}{% unless first_social %},{% endunless %}{{ settings.social_instagram | json }}{% assign first_social = false %}{% endif %}{% if settings.social_twitter != blank %}{% unless first_social %},{% endunless %}{{ settings.social_twitter | json }}{% assign first_social = false %}{% endif %}]
 }
 </script>
 <script type="application/ld+json">
@@ -134,7 +130,8 @@ routes: {
 cart_url: '{{ routes.cart_url }}',
 cart_add_url: '{{ routes.cart_add_url }}',
 cart_change_url: '{{ routes.cart_change_url }}',
-search_url: '{{ routes.search_url }}'
+search_url: '{{ routes.search_url }}',
+checkout_url: '{{ routes.checkout_url }}'
 }
 };
 /* Remove page loader fast — don't block content visibility */

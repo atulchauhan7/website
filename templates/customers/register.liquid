@@ -7,7 +7,7 @@
 <div data-animate="fade-up" data-animate-delay="200">
 {% form 'create_customer' %}
 {% if form.errors %}
-<div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--error">
 {{ form.errors | default_errors }}
 </div>
 {% endif %}
@@ -35,8 +35,8 @@
 
 <button type="submit" class="btn btn--primary btn--full">Create Account</button>
 
-<p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--color-text-muted);">
-Already have an account? <a href="{{ routes.account_login_url }}" style="color: var(--color-accent); font-weight: 500;">Sign in</a>
+<p class="form-footer">
+Already have an account? <a href="{{ routes.account_login_url }}">Sign in</a>
 </p>
 {% endform %}
 </div>

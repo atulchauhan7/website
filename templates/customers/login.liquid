@@ -7,7 +7,7 @@
 <div id="customer-login" data-animate="fade-up" data-animate-delay="200">
 {% form 'customer_login' %}
 {% if form.errors %}
-<div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--error">
 {{ form.errors | default_errors }}
 </div>
 {% endif %}
@@ -22,14 +22,14 @@
 <input class="form-input" type="password" id="login-password" name="customer[password]" required>
 </div>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-<a href="#recover" id="recover-link" style="font-size: 0.85rem; color: var(--color-accent);">Forgot your password?</a>
+<div class="form-row">
+<a href="#recover" id="recover-link">Forgot your password?</a>
 </div>
 
 <button type="submit" class="btn btn--primary btn--full">Sign In</button>
 
-<p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--color-text-muted);">
-Don't have an account? <a href="{{ routes.account_register_url }}" style="color: var(--color-accent); font-weight: 500;">Create one</a>
+<p class="form-footer">
+Don't have an account? <a href="{{ routes.account_register_url }}">Create one</a>
 </p>
 {% endform %}
 </div>
@@ -37,17 +37,17 @@ Don't have an account? <a href="{{ routes.account_register_url }}" style="color:
 <div id="recover-password" style="display:none" data-animate="fade-up">
 {% form 'recover_customer_password' %}
 {% if form.errors %}
-<div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--error">
 {{ form.errors | default_errors }}
 </div>
 {% endif %}
 {% if form.posted_successfully? %}
-<div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 2rem;">
+<div class="form-alert form-alert--success">
 We've sent you an email with a link to update your password.
 </div>
 {% endif %}
 
-<p style="margin-bottom: 1.5rem; color: var(--color-text-muted); font-size: 0.9rem;">Enter your email address and we'll send you a link to reset your password.</p>
+<p class="form-help">Enter your email address and we'll send you a link to reset your password.</p>
 
 <div class="form-group">
 <label class="form-label" for="recover-email">Email</label>
@@ -56,8 +56,8 @@ We've sent you an email with a link to update your password.
 
 <button type="submit" class="btn btn--primary btn--full">Reset Password</button>
 
-<p style="text-align: center; margin-top: 1.5rem;">
-<a href="#login" id="cancel-recover" style="font-size: 0.9rem; color: var(--color-accent);">&larr; Back to Login</a>
+<p class="form-footer" style="margin-top:1.5rem">
+<a href="#login" id="cancel-recover">&larr; Back to Login</a>
 </p>
 {% endform %}
 </div>

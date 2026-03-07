@@ -54,7 +54,7 @@ Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_b
 
 {% if product.description != blank %}
 <div class="product-info__description">
-{{ product.description | truncate: 300 }}
+{{ product.description | strip_html | truncate: 300 }}
 </div>
 {% endif %}
 
@@ -167,7 +167,7 @@ Care Instructions
 "@context": "https://schema.org/",
 "@type": "Product",
 "name": {{ product.title | json }},
-"image": {{ product.featured_image | image_url: width: 1200 | json }},
+{% if product.featured_image != blank %}"image": {{ product.featured_image | image_url: width: 1200 | json }},{% endif %}
 "description": {{ product.description | strip_html | truncate: 250 | json }},
 "brand": {
 "@type": "Brand",
