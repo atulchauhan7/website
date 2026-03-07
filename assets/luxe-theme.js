@@ -13,13 +13,15 @@ requestAnimationFrame(function(){initScrollAnimations();initSmoothReveal();initP
 /* === SCROLL PROGRESS === */
 (function(){
 const b=$('.scroll-progress');if(!b)return;
-window.addEventListener('scroll',function(){const s=document.documentElement.scrollTop;const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;b.style.width=(s/h)*100+'%'},{passive:true});
+var progTicking=false;
+window.addEventListener('scroll',function(){if(!progTicking){progTicking=true;requestAnimationFrame(function(){const s=document.documentElement.scrollTop;const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;b.style.width=(s/h)*100+'%';progTicking=false})}},{passive:true});
 })();
 
 /* === HEADER SCROLL === */
 const header=$('.site-header');
 const announcementBar=$('.announcement-bar');
 let lastScroll=0;
+var headerTicking=false;
 function handleHeaderScroll(){
 const cs=window.pageYOffset||document.documentElement.scrollTop;
 if(header){
@@ -27,8 +29,9 @@ header.classList.toggle('scrolled',cs>50);
 if(announcementBar){if(cs>150){announcementBar.classList.add('announcement-hidden');header.classList.remove('has-announcement')}else{announcementBar.classList.remove('announcement-hidden');header.classList.add('has-announcement')}}
 }
 lastScroll=cs;
+headerTicking=false;
 }
-window.addEventListener('scroll',throttle(handleHeaderScroll,16),{passive:true});
+window.addEventListener('scroll',function(){if(!headerTicking){headerTicking=true;requestAnimationFrame(handleHeaderScroll)}},{passive:true});
 
 /* === MOBILE MENU === */
 const menuToggle=$('.menu-toggle');
@@ -351,27 +354,17 @@ if(e.key==='Escape'){closeSearch();closeCartDrawer();closeWishlistDrawer();if(ty
 if(menuToggle&&menuToggle.classList.contains('active')){menuToggle.classList.remove('active');if(mobileNav)mobileNav.classList.remove('open');document.body.classList.remove('overflow-hidden')}}
 });
 
-/* === SCROLL ANIMATIONS === */
+/* === SCROLL ANIMATIONS — All elements visible immediately === */
 function initScrollAnimations(){
-const els=$$('[data-animate]:not(.animated)');
-if('IntersectionObserver' in window){
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const d=e.target.getAttribute('data-animate-delay')||0;setTimeout(()=>e.target.classList.add('animated'),parseInt(d));obs.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
-els.forEach(el=>obs.observe(el));
-}else els.forEach(el=>el.classList.add('animated'));
+$$('[data-animate]:not(.animated)').forEach(function(el){el.classList.add('animated')});
 }
 function initSmoothReveal(){
-const secs=$$('.shopify-section:not(.revealed)');
-if('IntersectionObserver' in window){
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target)}})},{threshold:0.05,rootMargin:'0px 0px -30px 0px'});
-secs.forEach(s=>obs.observe(s));
-}
+$$('.shopify-section:not(.revealed)').forEach(function(s){s.classList.add('revealed')});
 }
 function initSectionReveals(){
-const grids=$$('[data-stagger-reveal]');
-if('IntersectionObserver' in window){
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){Array.from(e.target.children).forEach((it,i)=>{setTimeout(()=>{it.style.opacity='1';it.style.transform='translateY(0)'},i*120)});obs.unobserve(e.target)}})},{threshold:0.1});
-grids.forEach(g=>{Array.from(g.children).forEach(it=>{it.style.opacity='0';it.style.transform='translateY(40px)';it.style.transition='opacity 0.6s ease,transform 0.6s ease'});obs.observe(g)});
-}
+$$('[data-stagger-reveal]').forEach(function(g){
+Array.from(g.children).forEach(function(it){it.style.opacity='1';it.style.transform='none'});
+});
 }
 
 /* === BACK TO TOP === */
@@ -468,19 +461,117 @@ this.closest('.site-footer__menu-col').classList.toggle('open');
 }
 initFooterToggle();
 
-/* === PRODUCT GALLERY === */
+/* === PRODUCT GALLERY SLIDER === */
 function initProductGallery(){
-/* Vertical gallery — zoom on hover */
-$$('.product-gallery--vertical .product-gallery__item').forEach(item=>{
-const img=item.querySelector('img');if(!img)return;
-item.addEventListener('mousemove',function(e){if(window.innerWidth<769)return;const r=item.getBoundingClientRect();img.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';img.style.transform='scale(1.6)'});
-item.addEventListener('mouseleave',()=>{img.style.transform='scale(1)'});
+/* Slider gallery */
+$$('.product-gallery--slider').forEach(function(gallery){
+var track=gallery.querySelector('.product-gallery__track');
+var slides=gallery.querySelectorAll('.product-gallery__slide');
+var dots=gallery.querySelectorAll('.product-gallery__dot');
+var counterCurrent=gallery.querySelector('.product-gallery__current');
+if(!track||slides.length<2)return;
+var current=0,dragging=false,startX=0,currentTranslate=0,prevTranslate=0;
+var DRAG_THRESHOLD=10,isDragged=false;
+
+function goTo(idx,smooth){
+if(idx<0)idx=0;
+if(idx>=slides.length)idx=slides.length-1;
+current=idx;
+currentTranslate=-(current*100);
+prevTranslate=currentTranslate;
+track.style.transition=smooth!==false?'transform 0.45s cubic-bezier(.25,.46,.45,.94)':'none';
+track.style.transform='translate3d('+currentTranslate+'%,0,0)';
+dots.forEach(function(d,i){d.classList.toggle('active',i===current)});
+if(counterCurrent)counterCurrent.textContent=current+1;
+}
+
+/* Dot clicks */
+dots.forEach(function(dot){
+dot.addEventListener('click',function(){goTo(parseInt(this.getAttribute('data-slide')))});
 });
+
+/* Touch swipe */
+track.addEventListener('touchstart',function(e){
+dragging=true;isDragged=false;
+startX=e.touches[0].clientX;
+track.style.transition='none';
+},{passive:true});
+track.addEventListener('touchmove',function(e){
+if(!dragging)return;
+var dx=e.touches[0].clientX-startX;
+if(Math.abs(dx)>DRAG_THRESHOLD)isDragged=true;
+if(isDragged){
+var pct=prevTranslate+(dx/track.parentElement.offsetWidth)*100;
+track.style.transform='translate3d('+pct+'%,0,0)';
+}
+},{passive:true});
+track.addEventListener('touchend',function(e){
+if(!dragging)return;
+dragging=false;
+if(!isDragged)return;
+var dx=e.changedTouches[0].clientX-startX;
+var threshold=track.parentElement.offsetWidth*0.2;
+if(dx<-threshold)goTo(current+1);
+else if(dx>threshold)goTo(current-1);
+else goTo(current);
+});
+
+/* Mouse drag */
+track.addEventListener('mousedown',function(e){
+dragging=true;isDragged=false;
+startX=e.clientX;
+track.style.transition='none';
+track.style.cursor='grabbing';
+e.preventDefault();
+});
+document.addEventListener('mousemove',function(e){
+if(!dragging)return;
+var dx=e.clientX-startX;
+if(Math.abs(dx)>DRAG_THRESHOLD)isDragged=true;
+if(isDragged){
+var pct=prevTranslate+(dx/track.parentElement.offsetWidth)*100;
+track.style.transform='translate3d('+pct+'%,0,0)';
+}
+});
+document.addEventListener('mouseup',function(){
+if(!dragging)return;
+dragging=false;
+track.style.cursor='';
+if(!isDragged)return;
+/* snap to nearest */
+var rect=track.getBoundingClientRect();
+var slideW=track.parentElement.offsetWidth;
+var currentOffset=rect.left-track.parentElement.getBoundingClientRect().left;
+var idx=Math.round(-currentOffset/slideW);
+goTo(Math.max(0,Math.min(idx,slides.length-1)));
+});
+
+/* Prevent click after drag */
+track.addEventListener('click',function(e){
+if(isDragged){e.preventDefault();e.stopPropagation();isDragged=false}
+},true);
+
+/* Zoom on hover (desktop) */
+slides.forEach(function(slide){
+var img=slide.querySelector('img');if(!img)return;
+slide.addEventListener('mousemove',function(e){
+if(window.innerWidth<769)return;
+var r=slide.getBoundingClientRect();
+img.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';
+img.style.transform='scale(1.5)';
+});
+slide.addEventListener('mouseleave',function(){img.style.transform='scale(1)'});
+});
+
+goTo(0,false);
+});
+
 /* Legacy thumb gallery */
-const mi=$('.product-gallery__main img'),ths=$$('.product-gallery__thumb');
-if(!mi||!ths.length)return;
-ths.forEach(th=>{th.addEventListener('click',function(){const ns=this.dataset.fullImage||this.querySelector('img').src;mi.style.opacity='0';mi.style.transform='scale(0.95)';setTimeout(()=>{mi.src=ns;mi.removeAttribute('srcset');mi.style.opacity='1';mi.style.transform='scale(1)'},300);ths.forEach(t=>t.classList.remove('active'));this.classList.add('active')})});
-if(mi){const ct=mi.parentElement;ct.addEventListener('mousemove',function(e){if(window.innerWidth<769)return;const r=ct.getBoundingClientRect();mi.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';mi.style.transform='scale(1.5)'});ct.addEventListener('mouseleave',()=>{mi.style.transform='scale(1)'})}
+var mi=$('.product-gallery__main img'),ths=$$('.product-gallery__thumb');
+if(mi&&ths.length){
+ths.forEach(function(th){th.addEventListener('click',function(){var ns=this.dataset.fullImage||this.querySelector('img').src;mi.style.opacity='0';mi.style.transform='scale(0.95)';setTimeout(function(){mi.src=ns;mi.removeAttribute('srcset');mi.style.opacity='1';mi.style.transform='scale(1)'},300);ths.forEach(function(t){t.classList.remove('active')});this.classList.add('active')})});
+if(mi){var ct=mi.parentElement;ct.addEventListener('mousemove',function(e){if(window.innerWidth<769)return;var r=ct.getBoundingClientRect();mi.style.transformOrigin=(e.clientX-r.left)/r.width*100+'% '+(e.clientY-r.top)/r.height*100+'%';mi.style.transform='scale(1.5)'});ct.addEventListener('mouseleave',function(){mi.style.transform='scale(1)'})}
+}
 }
 initProductGallery();
 
@@ -653,6 +744,7 @@ document.addEventListener('shopify:section:load',function(){initScrollAnimations
 function initParallax(){
 var els=$$('[data-parallax]');if(!els.length)return;
 if(window.innerWidth<769)return; /* disable on mobile for perf */
+var ticking=false;
 function updateParallax(){
 var st=window.pageYOffset;
 els.forEach(function(el){
@@ -663,8 +755,9 @@ var yPos=-(st-el.offsetTop+window.innerHeight)*speed;
 el.style.transform='translate3d(0,'+yPos+'px,0)';
 }
 });
+ticking=false;
 }
-window.addEventListener('scroll',throttle(updateParallax,16),{passive:true});
+window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(updateParallax)}},{passive:true});
 updateParallax();
 }
 

@@ -12,9 +12,11 @@
 </nav>
 
 <div class="product-page__grid">
-<div class="product-gallery product-gallery--vertical" data-animate="fade-right">
+<div class="product-gallery product-gallery--slider">
+<div class="product-gallery__viewport">
+<div class="product-gallery__track">
 {% for image in product.images %}
-<div class="product-gallery__item">
+<div class="product-gallery__slide">
 <img 
 src="{{ image | image_url: width: 800 }}"
 srcset="{{ image | image_url: width: 400 }} 400w,
@@ -31,13 +33,25 @@ decoding="async"
 >
 </div>
 {% else %}
-<div class="product-gallery__item">
+<div class="product-gallery__slide">
 {{ 'product-1' | placeholder_svg_tag }}
 </div>
 {% endfor %}
 </div>
+</div>
+{% if product.images.size > 1 %}
+<div class="product-gallery__dots">
+{% for image in product.images %}
+<button class="product-gallery__dot{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to image {{ forloop.index }}"></button>
+{% endfor %}
+</div>
+<div class="product-gallery__counter">
+<span class="product-gallery__current">1</span> / <span class="product-gallery__total">{{ product.images.size }}</span>
+</div>
+{% endif %}
+</div>
 
-<div class="product-info" data-animate="fade-left">
+<div class="product-info">
 {% if product.vendor != blank %}
 <div class="product-info__vendor">{{ product.vendor }}</div>
 {% endif %}

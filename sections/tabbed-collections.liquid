@@ -1,11 +1,6 @@
 <section class="section tabbed-collections" data-section-id="{{ section.id }}">
 <div class="container">
 <div class="tabbed-collections__header" data-animate="fade-up">
-{% if section.settings.subtitle != blank %}
-<div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
-{% endif %}
-<h2 class="section-header__title split-words">{{ section.settings.title }}</h2>
-
 <div class="tabbed-collections__tabs">
 {% for block in section.blocks %}
 <button class="tabbed-collections__tab {% if forloop.first %}active{% endif %}" data-tab-trigger="{{ block.id }}" {{ block.shopify_attributes }}>
