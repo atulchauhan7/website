@@ -1,5 +1,5 @@
 <section class="section--no-padding image-text {% if section.settings.reverse %}image-text--reversed{% endif %}" data-section-id="{{ section.id }}">
-<div class="image-text__media" data-animate="fade-in">
+<div class="image-text__media image-reveal" data-animate="fade-in">
 {% if section.settings.image != blank %}
 <img 
 src="{{ section.settings.image | image_url: width: 800 }}"
@@ -23,11 +23,11 @@ height="{{ 1200 | divided_by: section.settings.image.aspect_ratio | round }}"
 {% if section.settings.subtitle != blank %}
 <div class="image-text__subtitle" data-animate="fade-up">{{ section.settings.subtitle }}</div>
 {% endif %}
-<h2 class="image-text__heading" data-animate="fade-up" data-animate-delay="200">{{ section.settings.heading }}</h2>
+<h2 class="image-text__heading split-words" data-animate="fade-up" data-animate-delay="200">{{ section.settings.heading }}</h2>
 <div class="image-text__description" data-animate="fade-up" data-animate-delay="400">{{ section.settings.text }}</div>
 {% if section.settings.button_label != blank %}
 <div data-animate="fade-up" data-animate-delay="600">
-<a href="{{ section.settings.button_link }}" class="btn btn--primary">
+<a href="{{ section.settings.button_link }}" class="btn btn--primary btn--magnetic">
 {{ section.settings.button_label }}
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>

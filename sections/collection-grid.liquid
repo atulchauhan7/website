@@ -11,7 +11,7 @@
 <div class="container container--wide">
 <div class="cat-panel__grid cat-panel__grid--{{ section.blocks.size | at_most: 6 }}" data-animate-stagger>
 {% for block in section.blocks %}
-<a href="{{ block.settings.link }}" class="cat-card" data-animate="fade-up" {{ block.shopify_attributes }}>
+<a href="{{ block.settings.link }}" class="cat-card hover-lift" data-animate="clip-up" {{ block.shopify_attributes }}>
 <div class="cat-card__media">
 {% if block.settings.image != blank %}
 <img

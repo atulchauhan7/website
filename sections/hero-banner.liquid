@@ -34,17 +34,17 @@ height="1000"
 <div class="hero-slide__content">
 <div class="container">
 {% if block.settings.subtitle != blank %}
-<span class="hero-slide__subtitle">{{ block.settings.subtitle }}</span>
+<span class="hero-slide__subtitle" data-animate="fade-up">{{ block.settings.subtitle }}</span>
 {% elsif section.settings.subtitle != blank %}
-<span class="hero-slide__subtitle">{{ section.settings.subtitle }}</span>
+<span class="hero-slide__subtitle" data-animate="fade-up">{{ section.settings.subtitle }}</span>
 {% endif %}
 {% if block.settings.heading != blank %}
-<h1 class="hero-slide__title">{{ block.settings.heading }}</h1>
+<h1 class="hero-slide__title split-words" data-animate="fade-up" data-animate-delay="200">{{ block.settings.heading }}</h1>
 {% elsif section.settings.heading != blank %}
-<h1 class="hero-slide__title">{{ section.settings.heading }}</h1>
+<h1 class="hero-slide__title split-words" data-animate="fade-up" data-animate-delay="200">{{ section.settings.heading }}</h1>
 {% endif %}
 {% if section.settings.button_label != blank %}
-<a href="{{ section.settings.button_link }}" class="hero-slide__btn">
+<a href="{{ section.settings.button_link }}" class="hero-slide__btn btn--magnetic" data-animate="fade-up" data-animate-delay="400">
 {{ section.settings.button_label }}
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
@@ -80,13 +80,13 @@ height="1000"
 <div class="hero-slide__content">
 <div class="container">
 {% if section.settings.subtitle != blank %}
-<span class="hero-slide__subtitle">{{ section.settings.subtitle }}</span>
+<span class="hero-slide__subtitle" data-animate="fade-up">{{ section.settings.subtitle }}</span>
 {% endif %}
 {% if section.settings.heading != blank %}
-<h1 class="hero-slide__title">{{ section.settings.heading }}</h1>
+<h1 class="hero-slide__title split-words" data-animate="fade-up" data-animate-delay="200">{{ section.settings.heading }}</h1>
 {% endif %}
 {% if section.settings.button_label != blank %}
-<a href="{{ section.settings.button_link }}" class="hero-slide__btn">
+<a href="{{ section.settings.button_link }}" class="hero-slide__btn btn--magnetic" data-animate="fade-up" data-animate-delay="400">
 {{ section.settings.button_label }}
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>

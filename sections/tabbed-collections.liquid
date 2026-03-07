@@ -4,7 +4,7 @@
 {% if section.settings.subtitle != blank %}
 <div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
 {% endif %}
-<h2 class="section-header__title">{{ section.settings.title }}</h2>
+<h2 class="section-header__title split-words">{{ section.settings.title }}</h2>
 
 <div class="tabbed-collections__tabs">
 {% for block in section.blocks %}

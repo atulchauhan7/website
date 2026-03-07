@@ -4,7 +4,7 @@
 {% if section.settings.subtitle != blank %}
 <div class="section-header__subtitle">{{ section.settings.subtitle }}</div>
 {% endif %}
-<h2 class="section-header__title">{{ section.settings.title }}</h2>
+<h2 class="section-header__title split-words">{{ section.settings.title }}</h2>
 {% if section.settings.description != blank %}
 <p class="section-header__description">{{ section.settings.description }}</p>
 {% endif %}
@@ -22,7 +22,7 @@ required
 autocomplete="email"
 aria-label="Email address"
 >
-<button type="submit" class="newsletter__submit">
+<button type="submit" class="newsletter__submit btn--magnetic">
 {{ section.settings.button_label }}
 </button>
 {% endform %}
