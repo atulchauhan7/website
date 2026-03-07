@@ -620,7 +620,7 @@ p{margin-bottom:1rem}
 /* === PRODUCT PAGE — Ritu Kumar inspired: editorial, slider gallery === */
 .product-page{padding-top:0;overflow:hidden}
 /* Breadcrumbs — clear fixed header + announcement bar */
-.product-breadcrumbs{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:var(--color-text-muted);padding:1.25rem 0;letter-spacing:0.02em;flex-wrap:wrap}
+.product-breadcrumbs{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:var(--color-text-muted);padding:2px 0;letter-spacing:0.02em;flex-wrap:wrap}
 .product-breadcrumbs a{transition:color 0.3s}
 .product-breadcrumbs a:hover{color:var(--color-heading)}
 .product-breadcrumbs span[aria-hidden]{opacity:0.4}
@@ -634,8 +634,8 @@ p{margin-bottom:1rem}
 .product-gallery__slide img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform 0.8s var(--ease-out-expo)}
 .product-gallery__slide:hover img{transform:scale(1.03)}
 .product-gallery__dots{display:flex;gap:3px;padding:10px 0 0;width:100%}
-.product-gallery__dot{flex:1;height:3px;border-radius:0;background:var(--color-border);border:none;cursor:pointer;transition:background 0.3s ease;padding:0}
-.product-gallery__dot.active{background:var(--color-heading)}
+.product-gallery__dot{flex:1;height:2px;border-radius:0;background:var(--color-border);border:none;cursor:pointer;transition:all 0.35s ease;padding:0;opacity:0.5}
+.product-gallery__dot.active{background:var(--color-heading);height:3px;opacity:1}
 .product-gallery__counter{display:none}
 /* Keep legacy gallery support */
 .product-gallery{position:sticky;top:140px;max-width:100%;overflow:hidden}
